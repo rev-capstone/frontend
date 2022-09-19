@@ -50,7 +50,7 @@ const Navbar = () => {
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
-            <Badge color="primary">
+            <Badge color="primary" overlap="rectangular">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
