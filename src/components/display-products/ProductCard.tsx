@@ -1,11 +1,10 @@
-import { Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { Box } from "@mui/material";
 import { useContext, useState } from "react";
-import { text } from "stream/consumers";
-  import styled from "styled-components";
+import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 
@@ -73,16 +72,16 @@ import Product from "../../models/Product";
       product: Product,
       key: number
   }
-
-  const [quant,setQuant] = useState('');
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setQuant(event.target.value);
-  }
   
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
+
+    const [quant,setQuant] = useState('');
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setQuant(event.target.value);
+    }
 
     const addItemToCart = (product: Product) => {
 
@@ -102,7 +101,7 @@ import Product from "../../models/Product";
         <Circle />
         <Image src={props.product.image} />
         <Info>
-        <Box component="form" sx={{backgroundColor:'#e9f5f5',borderRadius:1}}>
+        <Box component="form" sx={{backgroundColor:'#f5fbfd',borderRadius:1}}>
           <TextField
             id="Quantity"
             label="Quantity"
