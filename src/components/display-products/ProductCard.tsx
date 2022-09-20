@@ -1,4 +1,4 @@
-import { TextField } from "@material-ui/core";
+import { Snackbar, TextField } from "@material-ui/core";
 import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
@@ -79,11 +79,23 @@ import Product from "../../models/Product";
 
     const [quant ,setQuant] = useState('1');
 
+    const[open, setOpen] = useState(false);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
     }
 
+    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+  
+      setOpen(false);
+    };
+
     const addItemToCart = (product: Product) => {
+
+      setOpen(true);
 
       const newCart = [...cart]
       const index = newCart.findIndex((searchProduct) => {
@@ -118,10 +130,16 @@ import Product from "../../models/Product";
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
-              if(Number(quant)>0) addItemToCart({...props.product, quantity: Number(quant)}
+              if(Number(quant)>0) addItemToCart({...props.product, quantity: Number(quant) }
               )}} />
           </Icon>
         </Info>
+        <Snackbar 
+          open={open}
+          autoHideDuration={4000}
+          onClose={handleClose}
+          message="Item added to cart"
+          />
       </Container>
     );
   };
