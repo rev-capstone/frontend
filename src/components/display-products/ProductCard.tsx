@@ -1,8 +1,10 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
+import { Box } from "@mui/material";
 import { useContext } from "react";
+import { text } from "stream/consumers";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
@@ -93,11 +95,12 @@ import Product from "../../models/Product";
         <Circle />
         <Image src={props.product.image} />
         <Info>
-        <Box component="form">
+        <Box component="form" sx={{backgroundColor:'#e9f5f5',borderRadius:1}}>
           <TextField
-            id="outlined-basic"
+            id="Quantity"
             label="Quantity"
             defaultValue="1"
+            variant="outlined"
           />
         </Box>
           <Icon>
