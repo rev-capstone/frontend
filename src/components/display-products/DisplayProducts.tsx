@@ -46,8 +46,7 @@ const DropdownContainer = styled.div`
   border-right: solid 1px rgba(0, 0, 0, 0.87);
 `;
 
-const searchContainer = styled.div`
-  width: 100%;
+const SearchContainer = styled.div`
   padding-right: 29%;
 `;
 
@@ -65,14 +64,35 @@ export const DisplayProducts = () => {
 
   const sortChange = (event : any) => {
     const sortBy = event.target.value;
+    const copyArray = [...products];
+    if(sortBy == "priceASC"){
+      copyArray.sort((a, b) => {
+        return a.price > b.price ? 1 : -1
+      });
+    }else if (sortBy === "priceDESC"){
+      copyArray.sort((a, b) => {
+        return a.quantity > b.quantity ? 1 : -1;
+      });
+    }else if (sortBy === "quantityASC"){
+      copyArray.sort((a, b) => {
+        return a.quantity > b.quantity ? 1 : -1;
+      });
+    }else if (sortBy === "quantityDESC"){
+      copyArray.sort((a, b) => {
+        return a.quantity < b.quantity ? 1 : -1;
+      });
+    }else{
+      copyArray.sort((a, b) => {
+        return a.id > b.id ? 1 : -1;
+      });
+    }
     setSort(sortBy);
-    console.log(sortBy);
+    setProducts(copyArray);
   }
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await apiGetAllProducts()
-      console.log(result);
       setProducts(result.payload)
     }
     fetchData()
@@ -85,44 +105,39 @@ export const DisplayProducts = () => {
             <Left>
               <DropdownContainer>
                 <FormControl fullWidth>
-                  <InputLabel id="dropdown-sort">Sort</InputLabel>
-                    <Select
-                      variant="standard"
-                      labelId="dropdown-sort"
-                      id="select-sort"
-                      value={filter}
-                      onChange={sortChange}
-                      label="Sort"
-                      inputProps={{
-                        style: {
-                          paddingRight: '60px'
-                        },
-                      }}>
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="price">Price</MenuItem>
-                      <MenuItem value="quantity">Quantity</MenuItem>
-                    </Select>
+                  <InputLabel id="dropdown-sort">Sort by:</InputLabel>
+                  <Select
+                  autoComplete='off'
+                  variant="standard"
+                  labelId="dropdown-sort"
+                  id="select-sort"
+                  value={sort}
+                  label="Sort"
+                  onChange={sortChange}
+                  >
+                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="priceASC">Price: Low</MenuItem>
+                  <MenuItem value="priceDESC">Price: High</MenuItem>
+                  <MenuItem value="quantityASC">Quantity: Low</MenuItem>
+                  <MenuItem value="quantityDESC">Quantity: High</MenuItem>
+                </Select>
                   </FormControl>
                 </DropdownContainer>
             </Left>
             <Right>
-              <TextField
-                id="search"
-                variant="standard"
-                label="Search"
-                onChange={filterChange}
-                InputProps={{
-                  style: {
-                    paddingRight: '15%'
-                  },
-                }}
-              />
+              <SearchContainer>
+                <TextField
+                  autoComplete='off'
+                  id="search"
+                  variant="standard"
+                  label="Search"
+                  onChange={filterChange}
+                />
+              </SearchContainer>
             </Right>
           </FilterContainer>
           <Container id="product-container">
-            {products.sort((a, b) => a.price > b.price ? 1 : -1).filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
+            {products.filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
                 <ProductCard product={item} key={item.id} />
             ))}
           </Container>
