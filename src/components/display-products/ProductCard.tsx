@@ -1,5 +1,5 @@
+import { Box, Button, TextField } from "@material-ui/core";
 import {
-    SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { flexbox } from "@mui/system";
@@ -7,7 +7,7 @@ import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
-  
+
   const Info = styled.div`
     opacity: 0;
     width: 100%;
@@ -23,7 +23,7 @@ import Product from "../../models/Product";
     transition: all 0.5s ease;
     cursor: pointer;
   `;
-  
+
   const Container = styled.div`
     flex: 1;
     margin: 5px;
@@ -38,7 +38,7 @@ import Product from "../../models/Product";
       opacity: 1;
     }
   `;
-  
+
   const Circle = styled.div`
     width: 200px;
     height: 200px;
@@ -46,12 +46,12 @@ import Product from "../../models/Product";
     background-color: white;
     position: absolute;
   `;
-  
+
   const Image = styled.img`
     height: 75%;
     z-index: 2;
   `;
-  
+
   const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -67,6 +67,7 @@ import Product from "../../models/Product";
       transform: scale(1.1);
     }
   `;
+<<<<<<< HEAD
   const buttonStyle ={
     height: "40px",
     width: "40px"
@@ -83,6 +84,9 @@ import Product from "../../models/Product";
     /* flexDirection: "column" */
   };
   
+=======
+
+>>>>>>> 8c799cdb8459f7f6336303f9ee43993d48540cbf
   interface productProps {
       product: Product,
       key: number
@@ -109,12 +113,20 @@ import Product from "../../models/Product";
         <Circle />
         <Image src={props.product.image} />
         <Info>
+        <Box component="form">
+          <TextField
+            id="outlined-basic"
+            label="Quantity"
+            defaultValue="1"
+          />
+        </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
               addItemToCart({...props.product, quantity: 1}
               //Make increment bar appear
               )}} />
           </Icon>
+<<<<<<< HEAD
           <Icon>
             <SearchOutlined />
           </Icon>
@@ -125,6 +137,8 @@ import Product from "../../models/Product";
               <input type="submit" id="AddBtn" style={buttonStyle} />
             </form>
           </div>
+=======
+>>>>>>> 8c799cdb8459f7f6336303f9ee43993d48540cbf
         </Info>
       </Container>
     );
