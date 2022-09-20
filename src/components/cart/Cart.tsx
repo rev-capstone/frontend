@@ -170,8 +170,8 @@ export const Cart = () => {
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
-                    <RemoveItem>
-                      TEST
+                    <RemoveItem >
+                        {/* onClick={() => cart.filter() */}
                     </RemoveItem>
                   </Product>
                   <Hr/>
