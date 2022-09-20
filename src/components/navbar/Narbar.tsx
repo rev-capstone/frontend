@@ -1,6 +1,5 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import { TextField } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -51,7 +50,7 @@ const Navbar = () => {
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
-            <Badge color="primary" overlap="rectangular">
+            <Badge color="primary">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
