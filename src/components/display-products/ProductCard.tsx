@@ -3,7 +3,7 @@ import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { Box } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { text } from "stream/consumers";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -74,6 +74,9 @@ import Product from "../../models/Product";
       key: number
   }
 
+  const [quant,setQuant] = useState('');
+  
+
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
 
@@ -106,11 +109,12 @@ import Product from "../../models/Product";
             }}
             defaultValue="1"
             variant="outlined"
+            onChange={event => setQuant(event.target.value)}
           />
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
-              addItemToCart({...props.product, quantity: 1}
+              addItemToCart({...props.product, quantity: Number(quant)}
               //Make increment bar appear
               )}} />
           </Icon>
