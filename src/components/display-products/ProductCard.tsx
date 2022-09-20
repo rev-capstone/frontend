@@ -77,7 +77,7 @@ import Product from "../../models/Product";
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
 
-    const [quant,setQuant] = useState('');
+    const [quant ,setQuant] = useState('1');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
@@ -101,23 +101,24 @@ import Product from "../../models/Product";
         <Circle />
         <Image src={props.product.image} />
         <Info>
-        <Box component="form" sx={{backgroundColor:'#f5fbfd',borderRadius:1}}>
+        <Box sx={{backgroundColor:'#f5fbfd',borderRadius:1,width: '30%'}}>
           <TextField
             id="Quantity"
             label="Quantity"
             type="number"
+            size="small"
             inputProps={{
               inputMode: 'numeric',
               min: '0'
             }}
             defaultValue="1"
-            variant="outlined"
+            variant="filled"
             onChange={handleChange}
           />
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
-              addItemToCart({...props.product, quantity: Number(quant)}
+              if(Number(quant)>0) addItemToCart({...props.product, quantity: Number(quant)}
               )}} />
           </Icon>
         </Info>
