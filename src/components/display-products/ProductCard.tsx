@@ -67,7 +67,14 @@ import Product from "../../models/Product";
       transform: scale(1.1);
     }
   `;
+  const myStyle = {
+    width: "100px"
+  }
 
+ /*  const TextField = styled.div`
+  width: 40px;
+  `;
+ */
   interface productProps {
       product: Product,
       key: number
@@ -96,13 +103,15 @@ import Product from "../../models/Product";
       setCart(newCart)
     }
 
+    
+
     return (
       <Container>
         <Circle />
         <Image src={props.product.image} />
         <Info>
         <Box component="form" sx={{backgroundColor:'#f5fbfd',borderRadius:1}}>
-          <TextField
+          <TextField style = {myStyle}
             id="Quantity"
             label="Quantity"
             type="number"
