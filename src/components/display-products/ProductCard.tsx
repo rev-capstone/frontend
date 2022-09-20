@@ -2,6 +2,7 @@ import {
     SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
+import { flexbox } from "@mui/system";
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -66,6 +67,21 @@ import Product from "../../models/Product";
       transform: scale(1.1);
     }
   `;
+  const buttonStyle ={
+    height: "40px",
+    width: "40px"
+  };
+  const qtyStyle ={
+    height: "34px",
+    width: "35px"
+  };
+  
+  const myStyle = {
+    float: "right",
+    display: "flex",
+    allignItems: "center"
+    /* flexDirection: "column" */
+  };
   
   interface productProps {
       product: Product,
@@ -102,11 +118,11 @@ import Product from "../../models/Product";
           <Icon>
             <SearchOutlined />
           </Icon>
-          <div>
+          <div style={myStyle}>
             <form action="">
-              <input type="submit" id="SubtBtn" />
-              <input type="text" />
-              <input type="submit" id="AddBtn" />
+              <input type="submit" id="SubtBtn" style={buttonStyle}/>
+              <input type="text" style={qtyStyle}/>
+              <input type="submit" id="AddBtn" style={buttonStyle} />
             </form>
           </div>
         </Info>
