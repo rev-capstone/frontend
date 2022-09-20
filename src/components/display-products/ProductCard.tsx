@@ -94,11 +94,21 @@ import Product from "../../models/Product";
         <Image src={props.product.image} />
         <Info>
           <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
+            <ShoppingCartOutlined onClick={() => {
+              addItemToCart({...props.product, quantity: 1}
+              //Make increment bar appear
+              )}} />
           </Icon>
           <Icon>
             <SearchOutlined />
           </Icon>
+          <div>
+            <form action="">
+              <input type="submit" id="SubtBtn" />
+              <input type="text" />
+              <input type="submit" id="AddBtn" />
+            </form>
+          </div>
         </Info>
       </Container>
     );
