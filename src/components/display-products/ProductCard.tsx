@@ -75,6 +75,10 @@ import Product from "../../models/Product";
   }
 
   const [quant,setQuant] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuant(event.target.value);
+  }
   
 
   export const ProductCard = (props: productProps) => {
@@ -109,13 +113,12 @@ import Product from "../../models/Product";
             }}
             defaultValue="1"
             variant="outlined"
-            onChange={event => setQuant(event.target.value)}
+            onChange={handleChange}
           />
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
               addItemToCart({...props.product, quantity: Number(quant)}
-              //Make increment bar appear
               )}} />
           </Icon>
         </Info>
