@@ -130,6 +130,9 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
+const RemoveItem = styled.button`
+`;
+
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
@@ -167,6 +170,9 @@ export const Cart = () => {
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
+                    <RemoveItem>
+
+                    </RemoveItem>
                   </Product>
                   <Hr/>
                 </>
