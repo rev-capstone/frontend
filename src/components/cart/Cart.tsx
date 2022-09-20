@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
+import Product from "../../models/Product";
 import Navbar from "../navbar/Narbar";
 
 const Container = styled.div``;
@@ -37,7 +38,7 @@ const Info = styled.div`
   flex: 3;
 `;
 
-const Product = styled.div`
+const ProductItem = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -131,12 +132,30 @@ const Button = styled.button`
 `;
 
 const RemoveItem = styled.button`
+  width: 100%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
 `;
+
 
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
+
+  const removeItemFromCart = (product: Product) => {
+
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.id === product.id
+    })
+
+    newCart.splice(index, 1);
+
+    setCart(newCart)
+  }
 
   return (
     <Container>
@@ -152,7 +171,7 @@ export const Cart = () => {
             {
               cart.map((product)=> (
                 <>
-                  <Product>
+                  <ProductItem>
                     <ProductDetail>
                       <Image src={product.image} />
                       <Details>
@@ -170,10 +189,10 @@ export const Cart = () => {
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
                     </PriceDetail>
-                    <RemoveItem >
-                        {/* onClick={() => cart.filter() */}
+                    <RemoveItem onClick={() => removeItemFromCart(product)}>
+                        
                     </RemoveItem>
-                  </Product>
+                  </ProductItem>
                   <Hr/>
                 </>
               ))
