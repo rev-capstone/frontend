@@ -1,9 +1,10 @@
-import { Box, Button, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
+import { Box } from "@mui/material";
 import { useContext, useState } from "react";
-  import styled from "styled-components";
+import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 
@@ -71,9 +72,16 @@ import Product from "../../models/Product";
       product: Product,
       key: number
   }
+  
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
+
+    const [quant,setQuant] = useState('');
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setQuant(event.target.value);
+    }
 
     const addItemToCart = (product: Product) => {
 
@@ -87,24 +95,29 @@ import Product from "../../models/Product";
 
       setCart(newCart)
     }
-    
-    
+
     return (
       <Container>
         <Circle />
         <Image src={props.product.image} />
         <Info>
-        <Box component="form">
+        <Box component="form" sx={{backgroundColor:'#f5fbfd',borderRadius:1}}>
           <TextField
-            id="outlined-basic"
+            id="Quantity"
             label="Quantity"
+            type="number"
+            inputProps={{
+              inputMode: 'numeric',
+              min: '0'
+            }}
             defaultValue="1"
+            variant="outlined"
+            onChange={handleChange}
           />
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
-              addItemToCart({...props.product, quantity: 3}
-              //Make increment bar appear
+              addItemToCart({...props.product, quantity: Number(quant)}
               )}} />
           </Icon>
         </Info>
