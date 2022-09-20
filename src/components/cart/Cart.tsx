@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import Navbar from "../navbar/Narbar";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Container = styled.div``;
 
@@ -132,7 +133,7 @@ const Button = styled.button`
 `;
 
 const RemoveItem = styled.button`
-  width: 100%;
+  width: 10%;
   padding: 10px;
   background-color: black;
   color: white;
@@ -186,12 +187,13 @@ export const Cart = () => {
                     <PriceDetail>
                       <ProductAmountContainer>
                         <ProductAmount> {product.quantity} </ProductAmount>
+                    <DeleteIcon onClick={() => removeItemFromCart(product)}></DeleteIcon>
+
                       </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
+
                     </PriceDetail>
-                    <RemoveItem onClick={() => removeItemFromCart(product)}>
-                        
-                    </RemoveItem>
+
                   </ProductItem>
                   <Hr/>
                 </>
