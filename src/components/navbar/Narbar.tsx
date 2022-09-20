@@ -3,6 +3,7 @@ import { ShoppingCartOutlined } from "@material-ui/icons";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { flip } from "../..";
 
 const Container = styled.div`
   height: 60px;
@@ -44,6 +45,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
+        <button onClick = {flip}>Mode Flip</button>
         <Logo onClick={() => {navigate('/')}}>Revature Swag Shop</Logo>
         </Left>
         <Right>
