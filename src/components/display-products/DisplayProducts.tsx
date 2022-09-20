@@ -1,4 +1,4 @@
-import { InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import Product from '../../models/Product';
@@ -39,15 +39,35 @@ const Left = styled.div`
   align-items: center;
 `;
 
+const DropdownContainer = styled.div`
+  width: 30%;
+  padding-left: 29%;
+  padding-right: 1%;
+  border-right: solid 1px rgba(0, 0, 0, 0.87);
+`;
+
+const searchContainer = styled.div`
+  width: 100%;
+  padding-right: 29%;
+`;
+
 export const DisplayProducts = () => {
 
   const [filter, setFilter] = useState("");
+
+  const [sort, setSort] = useState("");
 
   const [products, setProducts] = useState<Product[]>([])
 
   const filterChange = (event : any) => {
     setFilter(event.target.value);
   };
+
+  const sortChange = (event : any) => {
+    const sortBy = event.target.value;
+    setSort(sortBy);
+    console.log(sortBy);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,21 +83,29 @@ export const DisplayProducts = () => {
         <Navbar/>
           <FilterContainer>
             <Left>
-              <InputLabel id="sort">Sort</InputLabel>
-                <Select
-                  variant="standard"
-                  labelId="dropdown-sort"
-                  id="dropdown-sort"
-                  value={filter}
-                  onChange={filterChange}
-                  label="Sort"
-                >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                  <MenuItem value={20}>Price</MenuItem>
-                  <MenuItem value={30}>Quantity</MenuItem>
-                </Select>
+              <DropdownContainer>
+                <FormControl fullWidth>
+                  <InputLabel id="dropdown-sort">Sort</InputLabel>
+                    <Select
+                      variant="standard"
+                      labelId="dropdown-sort"
+                      id="select-sort"
+                      value={filter}
+                      onChange={sortChange}
+                      label="Sort"
+                      inputProps={{
+                        style: {
+                          paddingRight: '60px'
+                        },
+                      }}>
+                      <MenuItem value="">
+                        <em>None</em>
+                      </MenuItem>
+                      <MenuItem value="price">Price</MenuItem>
+                      <MenuItem value="quantity">Quantity</MenuItem>
+                    </Select>
+                  </FormControl>
+                </DropdownContainer>
             </Left>
             <Right>
               <TextField
@@ -94,7 +122,7 @@ export const DisplayProducts = () => {
             </Right>
           </FilterContainer>
           <Container id="product-container">
-            {products.filter((item) => item.name.toLocaleLowerCase().includes(filter)).map((item) => (
+            {products.sort((a, b) => a.price > b.price ? 1 : -1).filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
                 <ProductCard product={item} key={item.id} />
             ))}
           </Container>
