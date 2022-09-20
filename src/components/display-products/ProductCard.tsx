@@ -2,8 +2,7 @@ import { Box, Button, TextField } from "@material-ui/core";
 import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
-import { flexbox } from "@mui/system";
-import { useContext } from "react";
+import { useContext, useState } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
@@ -67,26 +66,7 @@ import Product from "../../models/Product";
       transform: scale(1.1);
     }
   `;
-<<<<<<< HEAD
-  const buttonStyle ={
-    height: "40px",
-    width: "40px"
-  };
-  const qtyStyle ={
-    height: "34px",
-    width: "35px"
-  };
-  
-  const myStyle = {
-    float: "right",
-    display: "flex",
-    allignItems: "center"
-    /* flexDirection: "column" */
-  };
-  
-=======
 
->>>>>>> 8c799cdb8459f7f6336303f9ee43993d48540cbf
   interface productProps {
       product: Product,
       key: number
@@ -107,7 +87,8 @@ import Product from "../../models/Product";
 
       setCart(newCart)
     }
-
+    
+    
     return (
       <Container>
         <Circle />
@@ -122,23 +103,10 @@ import Product from "../../models/Product";
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
-              addItemToCart({...props.product, quantity: 1}
+              addItemToCart({...props.product, quantity: 3}
               //Make increment bar appear
               )}} />
           </Icon>
-<<<<<<< HEAD
-          <Icon>
-            <SearchOutlined />
-          </Icon>
-          <div style={myStyle}>
-            <form action="">
-              <input type="submit" id="SubtBtn" style={buttonStyle}/>
-              <input type="text" style={qtyStyle}/>
-              <input type="submit" id="AddBtn" style={buttonStyle} />
-            </form>
-          </div>
-=======
->>>>>>> 8c799cdb8459f7f6336303f9ee43993d48540cbf
         </Info>
       </Container>
     );
