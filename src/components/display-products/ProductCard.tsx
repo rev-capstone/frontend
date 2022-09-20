@@ -99,6 +99,11 @@ import Product from "../../models/Product";
           <TextField
             id="Quantity"
             label="Quantity"
+            type="number"
+            inputProps={{
+              inputMode: 'numeric',
+              min: '0'
+            }}
             defaultValue="1"
             variant="outlined"
           />
