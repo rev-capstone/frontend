@@ -1,12 +1,12 @@
+import { Box, Button, TextField } from "@material-ui/core";
 import {
-    SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { useContext } from "react";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
-  
+
   const Info = styled.div`
     opacity: 0;
     width: 100%;
@@ -22,7 +22,7 @@ import Product from "../../models/Product";
     transition: all 0.5s ease;
     cursor: pointer;
   `;
-  
+
   const Container = styled.div`
     flex: 1;
     margin: 5px;
@@ -37,7 +37,7 @@ import Product from "../../models/Product";
       opacity: 1;
     }
   `;
-  
+
   const Circle = styled.div`
     width: 200px;
     height: 200px;
@@ -45,12 +45,12 @@ import Product from "../../models/Product";
     background-color: white;
     position: absolute;
   `;
-  
+
   const Image = styled.img`
     height: 75%;
     z-index: 2;
   `;
-  
+
   const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -66,7 +66,7 @@ import Product from "../../models/Product";
       transform: scale(1.1);
     }
   `;
-  
+
   interface productProps {
       product: Product,
       key: number
@@ -93,22 +93,19 @@ import Product from "../../models/Product";
         <Circle />
         <Image src={props.product.image} />
         <Info>
+        <Box component="form">
+          <TextField
+            id="outlined-basic"
+            label="Quantity"
+            defaultValue="1"
+          />
+        </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
               addItemToCart({...props.product, quantity: 1}
               //Make increment bar appear
               )}} />
           </Icon>
-          <Icon>
-            <SearchOutlined />
-          </Icon>
-          <div>
-            <form action="">
-              <input type="submit" id="SubtBtn" />
-              <input type="text" />
-              <input type="submit" id="AddBtn" />
-            </form>
-          </div>
         </Info>
       </Container>
     );
