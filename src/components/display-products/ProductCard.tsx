@@ -77,7 +77,7 @@ import Product from "../../models/Product";
     height: 40px;
     border-radius: 20px;
     background-color: white;
-     display: flex;
+    display: flex;
     flex-direction: column; 
     align-items: center;
     justify-content: center;
@@ -111,7 +111,7 @@ import Product from "../../models/Product";
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
-      console.log(event.target.value);
+      
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -130,12 +130,12 @@ import Product from "../../models/Product";
       })
 
         if (index === -1) {
-          if(Number(quant) > props.product.quantity) {console.log("too many items"); setStockOpen(true);}
+          if(Number(quant) > props.product.quantity) { setStockOpen(true);}
           else {newCart.push(product); setOpen(true);}
         }
         else {
           
-          if(Number(quant) + newCart[index].quantity >props.product.quantity){console.log("too many items"); setStockOpen(true);}
+          if(Number(quant) + newCart[index].quantity >props.product.quantity){ setStockOpen(true);}
           else {newCart[index].quantity += product.quantity; setOpen(true);}
         }
   
@@ -187,11 +187,10 @@ import Product from "../../models/Product";
           message="added to cart"
           />
          <Snackbar 
-         
           open={stockOpen}
           autoHideDuration={4000}
           onClose={handleClose}
-          message= {"Not enough of this item in stock to add too cart (Max stock availiable: " + props.product.quantity + ")"}
+          message= {"Not enough items in stock"}
           />
       </Container>
     );
