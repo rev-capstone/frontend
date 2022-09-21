@@ -1,10 +1,12 @@
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import Navbar from "../navbar/Narbar";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { TextField } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 const Container = styled.div``;
 
@@ -78,6 +80,7 @@ const PriceDetail = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Roboto;
 `;
 
 const ProductAmountContainer = styled.div`
@@ -145,7 +148,13 @@ export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
-
+  
+  const[quant, setQuant] = useState('');
+  
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    setQuant(event.target.value);
+    
+  }
   const removeItemFromCart = (product: Product) => {
 
     const newCart = [...cart]
@@ -185,12 +194,27 @@ export const Cart = () => {
                       </Details>
                     </ProductDetail>
                     <PriceDetail>
+                    <ProductPrice>$ {product.price}</ProductPrice>
                       <ProductAmountContainer>
-                        <ProductAmount> {product.quantity} </ProductAmount>
+                       Qty: <ProductAmount> {product.quantity} </ProductAmount>
+                       <Box component="form" sx={{backgroundColor:'#f5fbfd', borderRadius:1, width:'50px'}}>
+                        <TextField
+                        id="Quantity"
+                        label="Quantity"
+                        type="number"
+                        inputProps={{
+                          inputMode: 'numeric',
+                          min: '0'
+                        }}
+                        defaultValue="1"
+                        variant="outlined"
+                        onChange={handleChange}
+                        />
+                       </Box>
                     <DeleteIcon onClick={() => removeItemFromCart(product)}></DeleteIcon>
 
                       </ProductAmountContainer>
-                      <ProductPrice>$ {product.price}</ProductPrice>
+                   
 
                     </PriceDetail>
 
