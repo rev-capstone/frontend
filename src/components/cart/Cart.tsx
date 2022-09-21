@@ -181,7 +181,7 @@ export const Cart = () => {
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton onClick={() => {navigate('/')}}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => {if(!(cart.length === 0)){navigate('/checkout')}}}>CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -250,7 +250,7 @@ export const Cart = () => {
                 {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
               </SummaryItemPrice>
             </SummaryItem>
-            <Button onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</Button>
+            <Button onClick={() => {if(!(cart.length === 0)){navigate('/checkout')}}}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
