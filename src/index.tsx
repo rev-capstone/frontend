@@ -14,47 +14,19 @@ import { createTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ModeComment } from '@material-ui/icons';
 import Narbar from './components/navbar/Narbar';
+import { dark } from './context/theme.context';
 
-export const dark = createTheme({
-  palette: {
-    type: "dark",
-  }
-});
-export const light = createTheme({
-  palette: {
-    type: "light",
-  }
-});
-
-let mode = light;
-
-export function flip()
-{
-  mode = (mode === light ? dark : light);
-  console.log(mode.palette.type);
-  root.render(
-    <ThemeProvider theme={mode}>
-      <CssBaseline />
-      <React.StrictMode>
-        
-        <App/>
-      </React.StrictMode>
-    </ThemeProvider>
-  
-  );
-  
-}
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <ThemeProvider theme={mode}>
-    <CssBaseline />
-    <React.StrictMode>
-      
-      <App/>
-    </React.StrictMode>
-  </ThemeProvider>
+  <ThemeProvider theme={dark}>
+  <CssBaseline />
+  <React.StrictMode>
+    
+    <App/>
+  </React.StrictMode>
+</ThemeProvider>
 
 );
 

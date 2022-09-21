@@ -55,8 +55,8 @@ export default function Login() {
     }
   };
   return (
-      <Container component="main" maxWidth="xs">
-        <Navbar />
+
+      <><Navbar /><Container component="main" maxWidth="xs">
         <Box
           sx={{
             marginTop: 8,
@@ -117,8 +117,9 @@ export default function Login() {
                 </Link>
               </Grid>
             </Grid>
-          </Box>
+          </Grid>
         </Box>
-      </Container>
+      </Box>
+    </Container></>
   );
 }
