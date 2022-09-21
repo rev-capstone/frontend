@@ -40,7 +40,7 @@ const Left = styled.div`
 `;
 
 const DropdownContainer = styled.div`
-  width: 30%;
+  width: 50%;
   padding-left: 29%;
   padding-right: 1%;
   border-right: solid 1px rgba(0, 0, 0, 0.87);
