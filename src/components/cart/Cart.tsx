@@ -199,7 +199,7 @@ export const Cart = () => {
                           <b>ID:</b> {product.id}
                         </ProductId>
                       </Details>
-                    </ProductDetail>
+                    </ProductDetail> 
                     <PriceDetail>
                     <ProductPrice>$ {product.price}</ProductPrice>
                       <ProductAmountContainer>
