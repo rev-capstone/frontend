@@ -62,15 +62,12 @@ import Product from "../../models/Product";
     align-items: center;
     justify-content: center;
     margin: 10px;
-    transition: all 0.5s ease;
-    
+    transition: all 0.
     &:hover {
       background-color: #e9f5f5;
-      transform: scale(1.1);
-    }
-    
+      transform: scale(1.1)
 
-   
+
   `;
   const Stock = styled.div`
     width: 100px;
@@ -78,7 +75,7 @@ import Product from "../../models/Product";
     border-radius: 20px;
     background-color: white;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 10px;
@@ -86,21 +83,22 @@ import Product from "../../models/Product";
     color: black;
     text-align: center;
     font-weight: bold;
-    
+
     position: absolute;
     bottom: 5px;
     right: 5px;
-    
+
   `;
+
 
   interface productProps {
       product: Product,
       key: number
   }
-  
+
 
   export const ProductCard = (props: productProps) => {
-    
+
     const { cart, setCart } = useContext(CartContext);
 
     const [quant ,setQuant] = useState('1');
@@ -121,7 +119,7 @@ import Product from "../../models/Product";
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
-      
+
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -143,27 +141,27 @@ import Product from "../../models/Product";
           else {newCart.push(product); setOpen(true); setInCart(product.quantity)}
         }
         else {
-          
+
           if(Number(quant) + newCart[index].quantity >props.product.quantity){ setStockOpen(true);}
           else {newCart[index].quantity += product.quantity; setOpen(true); setInCart(newCart[index].quantity)}
         }
-  
-        setCart(newCart) 
-      
-      
+
+        setCart(newCart)
+
+
     }
 
     return (
-      
+
       <Container>
-        
+
         <Circle />
         <Image src={props.product.image} />
-        
+
         <Info>
-        
+
         <Box sx={{backgroundColor:'#f5fbfd',borderRadius:1,width: '30%'}}>
-        
+
           <TextField
             id="Quantity"
             label="Quantity"
@@ -181,26 +179,32 @@ import Product from "../../models/Product";
         {/* <Stock></Stock> */}
           <Icon>
             <ShoppingCartOutlined onClick={() => {
-              
+
               if(Number(quant)>0) addItemToCart({...props.product, quantity: Number(quant) }
-              
+
               )}} />
           </Icon>
           <Stock>Stock: {props.product.quantity-inCart}</Stock>
         </Info>
-        
-        <Snackbar 
+
+        <Snackbar
           open={open}
           autoHideDuration={4000}
-          onClose={handleClose}
-          message="added to cart"
-          />
-         <Snackbar 
+          >
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          Added item to cart!
+        </Alert>
+        </Snackbar>
+
+        <Snackbar
           open={stockOpen}
-          autoHideDuration={4000}
+          autoHideDuration={1000}
           onClose={handleClose}
-          message= {"Not enough items in stock"}
-          />
+          >
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+            Amount in cart over stock!
+        </Alert>
+        </Snackbar>
       </Container>
     );
   };
