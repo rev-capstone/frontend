@@ -155,10 +155,11 @@ import Product from "../../models/Product";
           message="added to cart"
           />
          <Snackbar 
+         
           open={stockOpen}
           autoHideDuration={4000}
           onClose={handleClose}
-          message="Not enough of this item in stock"
+          message= {"Not enough of this item in stock to add too cart (Max stock availiable: " + props.product.quantity + ")"}
           />
       </Container>
     );
