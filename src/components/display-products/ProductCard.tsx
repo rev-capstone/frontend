@@ -80,7 +80,7 @@ import Product from "../../models/Product";
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
     
-    const [quant,setQuant] = useState('');
+    const [quant,setQuant] = useState('1');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
