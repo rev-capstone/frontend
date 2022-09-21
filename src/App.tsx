@@ -4,17 +4,31 @@ import './App.css';
 import { CartContext } from './context/cart.context';
 import ProductItem from './models/Product';
 import { AppRoutes } from './router/AppRoutes';
+import { Theme, ThemeProvider } from '@material-ui/core/styles'
+import { ThemeContext } from 'styled-components';
+import { dark, light } from './context/theme.context';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
+  
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
 
+  const [theme, setTheme] = useState<Theme>(light);
+  const themeValue = { theme, setTheme };
+
   return (
-    <CartContext.Provider value={value}>
-      <Router>
-        <AppRoutes></AppRoutes>
-      </Router>
-    </CartContext.Provider>
+    
+    <ThemeContext.Provider value={themeValue}>
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+        <CartContext.Provider value={value}>
+          <Router>
+            <AppRoutes></AppRoutes>
+          </Router>
+        </CartContext.Provider>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 
