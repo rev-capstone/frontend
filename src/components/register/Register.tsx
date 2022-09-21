@@ -173,7 +173,7 @@ export default function Register() {
                 id="password"
                 autoComplete="new-password" />
             </Grid>
-          </Grid>
+          </Box>
           <Button
             type="submit"
             fullWidth
@@ -190,7 +190,6 @@ export default function Register() {
             </Grid>
           </Grid>
         </Box>
-      </Box>
     </Container></>
   );
 }

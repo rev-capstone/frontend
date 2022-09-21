@@ -54,7 +54,8 @@ export default function Login() {
           setVisible({...visible, visibility: true})
     }
   };
-  return (
+
+  return(
 
       <><Navbar /><Container component="main" maxWidth="xs">
         <Box
@@ -117,9 +118,8 @@ export default function Login() {
                 </Link>
               </Grid>
             </Grid>
-          </Grid>
+          </Box>
         </Box>
-      </Box>
     </Container></>
   );
 }
