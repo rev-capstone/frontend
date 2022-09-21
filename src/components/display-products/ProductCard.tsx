@@ -1,12 +1,14 @@
+import { Button, TextField } from "@material-ui/core";
 import {
-    SearchOutlined,
     ShoppingCartOutlined,
   } from "@material-ui/icons";
-import { useContext } from "react";
+import { Box } from "@mui/material";
+import { useContext, useState } from "react";
+import { text } from "stream/consumers";
   import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
-  
+
   const Info = styled.div`
     opacity: 0;
     width: 100%;
@@ -22,7 +24,7 @@ import Product from "../../models/Product";
     transition: all 0.5s ease;
     cursor: pointer;
   `;
-  
+
   const Container = styled.div`
     flex: 1;
     margin: 5px;
@@ -37,7 +39,7 @@ import Product from "../../models/Product";
       opacity: 1;
     }
   `;
-  
+
   const Circle = styled.div`
     width: 200px;
     height: 200px;
@@ -45,12 +47,12 @@ import Product from "../../models/Product";
     background-color: white;
     position: absolute;
   `;
-  
+
   const Image = styled.img`
     height: 75%;
     z-index: 2;
   `;
-  
+
   const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -66,11 +68,18 @@ import Product from "../../models/Product";
       transform: scale(1.1);
     }
   `;
-  
+
   interface productProps {
       product: Product,
       key: number
   }
+
+  const [quant,setQuant] = useState('');
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuant(event.target.value);
+  }
+  
 
   export const ProductCard = (props: productProps) => {
     const { cart, setCart } = useContext(CartContext);
@@ -93,11 +102,24 @@ import Product from "../../models/Product";
         <Circle />
         <Image src={props.product.image} />
         <Info>
+        <Box component="form" sx={{backgroundColor:'#e9f5f5',borderRadius:1}}>
+          <TextField
+            id="Quantity"
+            label="Quantity"
+            type="number"
+            inputProps={{
+              inputMode: 'numeric',
+              min: '0'
+            }}
+            defaultValue="1"
+            variant="outlined"
+            onChange={handleChange}
+          />
+        </Box>
           <Icon>
-            <ShoppingCartOutlined onClick={() => {addItemToCart({...props.product, quantity: 1})}} />
-          </Icon>
-          <Icon>
-            <SearchOutlined />
+            <ShoppingCartOutlined onClick={() => {
+              addItemToCart({...props.product, quantity: Number(quant)}
+              )}} />
           </Icon>
         </Info>
       </Container>
