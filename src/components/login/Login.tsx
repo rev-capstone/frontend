@@ -13,6 +13,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 import { Visibility } from '@material-ui/icons';
+import Navbar from '../navbar/Narbar';
+
 
 const theme = createTheme();
 const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -53,9 +55,8 @@ export default function Login() {
     }
   };
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <Navbar />
         <Box
           sx={{
             marginTop: 8,
@@ -64,6 +65,7 @@ export default function Login() {
             alignItems: 'center',
           }}
         >
+          
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
@@ -80,6 +82,9 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              style = {{
+                backgroundColor : "#ffffff"
+              }}
             />
             <TextField
               margin="normal"
@@ -90,6 +95,9 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+               style = {{
+                backgroundColor : "#ffffff"
+              }}
               />
 
             {visible.visibility ? <div style={{ color: 'red', display: 'block' }}> Email/password is incorrect</div> : <></>}
@@ -112,6 +120,5 @@ export default function Login() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

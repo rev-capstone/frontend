@@ -16,6 +16,8 @@ import {Tooltip} from '@material-ui/core';
 
 
 
+import Navbar from '../navbar/Narbar';
+
 const theme = createTheme();
 const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 const nameRegex = new RegExp( /^[a-zA-Z\s]*$/);
@@ -71,9 +73,8 @@ export default function Register() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <Navbar />
         <Box
           sx={{
             marginTop: 8,
@@ -157,6 +158,5 @@ export default function Register() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
   );
 }

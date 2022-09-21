@@ -1,8 +1,12 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
+import { TextField } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { flip } from "../..";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 const Container = styled.div`
   height: 60px;
@@ -37,6 +41,27 @@ const MenuItem = styled.div`
   margin-left: 25px;
 `;
 
+const Button = styled.div`
+  cursor: pointer;
+  padding : 20px;
+  top : 2px;
+`;
+let icon = <Brightness7Icon />;
+let x = true;
+function realFlip()
+{
+  flip();
+  if(x)
+  {
+    x = false;
+    icon = <Brightness4Icon/>;
+  }
+  else
+  {
+    x = true;
+    icon = <Brightness7Icon />;
+  }
+}
 const Navbar = () => {
   const navigate = useNavigate();
 
@@ -54,6 +79,7 @@ const Navbar = () => {
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
+          <Button onClick = {realFlip}>{icon}</Button>
         </Right>
       </Wrapper>
     </Container>
