@@ -174,7 +174,7 @@ export const Cart = () => {
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton onClick={() => {navigate('/')}}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => {navigate('/checkout')}}> CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
