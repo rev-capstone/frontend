@@ -1,11 +1,11 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { flip } from "../..";
+import styled, { ThemeContext } from "styled-components";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { light, dark } from "../../context/theme.context";
 
 const Container = styled.div`
   height: 60px;
@@ -45,24 +45,18 @@ const Button = styled.div`
   padding : 20px;
   top : 2px;
 `;
-let icon = <Brightness7Icon />;
+let moon = <Brightness7Icon />;
+let sun = <Brightness4Icon/>;
 let x = true;
-function realFlip()
-{
-  flip();
-  if(x)
-  {
-    x = false;
-    icon = <Brightness4Icon/>;
-  }
-  else
-  {
-    x = true;
-    icon = <Brightness7Icon />;
-  }
-}
+
 const Navbar = () => {
   const navigate = useNavigate();
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  function lightDark() {
+    setTheme(theme === light ? dark : light);
+    x = !x;
+  }
 
   return (
     <Container>
@@ -78,7 +72,7 @@ const Navbar = () => {
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
-          <Button onClick = {realFlip}>{icon}</Button>
+          <Button onClick={lightDark}>{x ? sun : moon}</Button>
         </Right>
       </Wrapper>
     </Container>
@@ -86,3 +80,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+

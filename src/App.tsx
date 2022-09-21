@@ -1,43 +1,35 @@
-import { createTheme, PaletteMode } from '@mui/material';
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import { CartContext } from './context/cart.context';
-import { ColorModeContext } from './context/ColorModeContext'
 import ProductItem from './models/Product';
 import { AppRoutes } from './router/AppRoutes';
+import { Theme, ThemeProvider } from '@material-ui/core/styles'
+import { ThemeContext } from 'styled-components';
+import { dark, light } from './context/theme.context';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
   
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
 
-  const [mode, setMode] = React.useState<PaletteMode>('light');
-  const colorMode = React.useMemo(
-    () => ({
-      // The dark mode switch would invoke this method
-      toggleColorMode: () => {
-        setMode((prevMode: PaletteMode) =>
-          prevMode === 'light' ? 'dark' : 'light',
-        );
-      },
-    }),
-    [],
-  );
-
-  // Update the theme only if the mode changes
-  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const [theme, setTheme] = useState<Theme>(light);
+  const themeValue = { theme, setTheme };
 
   return (
-    <ColorModeContext.Provider value={colorMode}>
+    
+    <ThemeContext.Provider value={themeValue}>
       <ThemeProvider theme={theme}>
-    <CartContext.Provider value={value}>
-      <Router>
-        <AppRoutes></AppRoutes>
-      </Router>
-    </CartContext.Provider>
-    </ThemeProvider>
-    </ColorModeContext.Provider>
+      <CssBaseline />
+        <CartContext.Provider value={value}>
+          <Router>
+            <AppRoutes></AppRoutes>
+          </Router>
+        </CartContext.Provider>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }
 
