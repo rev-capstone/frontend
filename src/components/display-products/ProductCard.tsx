@@ -2,7 +2,7 @@ import { Snackbar, TextField } from "@material-ui/core";
 import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
-import { Box } from "@mui/material";
+import { Alert, Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
