@@ -63,10 +63,34 @@ import Product from "../../models/Product";
     justify-content: center;
     margin: 10px;
     transition: all 0.5s ease;
+    
     &:hover {
       background-color: #e9f5f5;
       transform: scale(1.1);
     }
+    
+
+   
+  `;
+  const Stock = styled.div`
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+     display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    transition: all 0.5s ease;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+    
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    
   `;
 
   interface productProps {
@@ -121,11 +145,16 @@ import Product from "../../models/Product";
     }
 
     return (
+      
       <Container>
+        
         <Circle />
         <Image src={props.product.image} />
+        
         <Info>
+        
         <Box sx={{backgroundColor:'#f5fbfd',borderRadius:1,width: '30%'}}>
+        
           <TextField
             id="Quantity"
             label="Quantity"
@@ -140,6 +169,7 @@ import Product from "../../models/Product";
             onChange={handleChange}
           />
         </Box>
+        {/* <Stock></Stock> */}
           <Icon>
             <ShoppingCartOutlined onClick={() => {
               
@@ -147,7 +177,9 @@ import Product from "../../models/Product";
               
               )}} />
           </Icon>
+          <Stock>Stock: {props.product.quantity}</Stock>
         </Info>
+        
         <Snackbar 
           open={open}
           autoHideDuration={4000}
