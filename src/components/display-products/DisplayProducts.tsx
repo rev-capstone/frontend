@@ -67,7 +67,7 @@ export const DisplayProducts = () => {
     const copyArray = [...products];
     if(sortBy == "priceASC"){
       copyArray.sort((a, b) => {
-        return a.price > b.price ? 1 : -1
+        return a.price > b.price ? 1 : -1;
       });
     }else if (sortBy === "priceDESC"){
       copyArray.sort((a, b) => {
@@ -105,7 +105,7 @@ export const DisplayProducts = () => {
             <Left>
               <DropdownContainer>
                 <FormControl fullWidth>
-                  <InputLabel id="dropdown-sort">Sort by:</InputLabel>
+                  <InputLabel id="dropdown-sort">Sort By:</InputLabel>
                   <Select
                   autoComplete='off'
                   variant="standard"
@@ -115,7 +115,7 @@ export const DisplayProducts = () => {
                   label="Sort"
                   onChange={sortChange}
                   >
-                  <MenuItem value="None">None</MenuItem>
+                  <MenuItem value="None">Default</MenuItem>
                   <MenuItem value="priceASC">Price: Low</MenuItem>
                   <MenuItem value="priceDESC">Price: High</MenuItem>
                   <MenuItem value="quantityASC">Quantity: Low</MenuItem>
