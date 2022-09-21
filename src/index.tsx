@@ -30,10 +30,8 @@ let mode = light;
 
 export function flip()
 {
-  console.log("Before: " + mode.palette.type);
   mode = (mode === light ? dark : light);
-  console.log("After: " + mode.palette.type);
-  console.log(document.getElementsByTagName("ThemeProvider"));
+  console.log(mode.palette.type);
   root.render(
     <ThemeProvider theme={mode}>
       <CssBaseline />

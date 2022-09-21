@@ -50,17 +50,14 @@ let x = true;
 function realFlip()
 {
   flip();
-  console.log(icon);
   if(x)
   {
     x = false;
-    console.log("If");
     icon = <Brightness4Icon/>;
   }
   else
   {
     x = true;
-    console.log("Else");
     icon = <Brightness7Icon />;
   }
 }
