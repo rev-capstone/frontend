@@ -12,14 +12,13 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiRegister } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
-import {IconButton, Tooltip} from '@material-ui/core';
-import InfoIcon from '@mui/icons-material/Info';
-import { width } from '@mui/system';
+import {Tooltip} from '@material-ui/core';
+
 
 
 const theme = createTheme();
 const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-const nameRegex = new RegExp( /^[a-zA-Z]+$/);
+const nameRegex = new RegExp( /^[a-zA-Z\s]*$/);
 //Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character: 
 const passRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
 
@@ -34,37 +33,30 @@ export default function Register() {
     const data = new FormData(event.currentTarget);
 
     if(!nameRegex.test(`${data.get('firstName')}`) || !nameRegex.test(`${data.get('lastName')}`)){
-      console.log("invalid first/last name");
-      console.log(nameRegex.test(`${data.get('firstName')}`), nameRegex.test(`${data.get('lastName')}`) );
       setErrormessage({...errorMessage, errmessage: "Name can only contain letters"});
       setVisible({...visible, visibility: true})
 
     }
 
     else if(!emailRegex.test(`${data.get('email')}`)){
-      console.log("invalid email");
       setErrormessage({...errorMessage, errmessage: "Email Syntax is incorrect!"});
       setVisible({...visible, visibility: true})
     }
 
     else if(!passRegex.test(`${data.get('password')}`)){
-      console.log("invalid email");
       setErrormessage({...errorMessage, errmessage: "Password does not follow guidelines!"});
       setVisible({...visible, visibility: true})
     }
 
     else{
       try {
-        console.log(`${data.get('firstName')}`);
       const response = await apiRegister(`${data.get('firstName')}`, `${data.get('lastName')}`, `${data.get('email')}`, `${data.get('password')}`)
       if (response.status >= 200 && response.status < 300) {navigate('/login')}
-      console.log("LOOK AT ME DAMNIT");
         
       } catch (error: any) {
-        console.log(error);
         
-        if(error.code == "ERR_BAD_REQUEST"){
-          setErrormessage({...errorMessage, errmessage: "User already exists! Be someone else."});
+        if(error.code === "ERR_BAD_REQUEST"){
+          setErrormessage({...errorMessage, errmessage: "An account has already been registered with this email!"});
           setVisible({...visible, visibility: true})
 
         }
