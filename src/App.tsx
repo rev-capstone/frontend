@@ -8,6 +8,7 @@ import ProductItem from './models/Product';
 import { AppRoutes } from './router/AppRoutes';
 
 function App() {
+  
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
 
