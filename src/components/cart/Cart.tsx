@@ -77,16 +77,16 @@ const ProductSize = styled.span``;
 const PriceDetail = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   font-family: Roboto;
 `;
 
-const ProductAmountContainer = styled.div`
+const ProductAmountContainer = styled.span`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  margin: 10px;
 `;
 
 const ProductAmount = styled.div`
@@ -94,7 +94,7 @@ const ProductAmount = styled.div`
   margin: 5px;
 `;
 
-const ProductPrice = styled.div`
+const ProductPrice = styled.span`
   font-size: 30px;
   font-weight: 200;
 `;
@@ -149,12 +149,18 @@ export const Cart = () => {
 
   const navigate = useNavigate();
   
-  const[quant, setQuant] = useState('');
-  
   const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-    setQuant(event.target.value);
-    
+    let product: string = event.target.id;
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.name === product
+    })
+
+    newCart[index].quantity = parseInt(event.target.value);
+
+    setCart(newCart)
   }
+
   const removeItemFromCart = (product: Product) => {
 
     const newCart = [...cart]
@@ -166,6 +172,7 @@ export const Cart = () => {
 
     setCart(newCart)
   }
+
 
   return (
     <Container>
@@ -196,25 +203,22 @@ export const Cart = () => {
                     <PriceDetail>
                     <ProductPrice>$ {product.price}</ProductPrice>
                       <ProductAmountContainer>
-                       Qty: <ProductAmount> {product.quantity} </ProductAmount>
-                       <Box component="form" sx={{backgroundColor:'#f5fbfd', borderRadius:1, width:'50px'}}>
+                       <Box component="form" sx={{backgroundColor:'#f5fbfd', borderRadius:1, width:'70px'}}>
                         <TextField
-                        id="Quantity"
+                        id = {product.name}
                         label="Quantity"
                         type="number"
                         inputProps={{
                           inputMode: 'numeric',
                           min: '0'
                         }}
-                        defaultValue="1"
+                        defaultValue = {product.quantity}
                         variant="outlined"
                         onChange={handleChange}
                         />
                        </Box>
-                    <DeleteIcon onClick={() => removeItemFromCart(product)}></DeleteIcon>
-
                       </ProductAmountContainer>
-                   
+                   <DeleteIcon onClick={() => removeItemFromCart(product)}></DeleteIcon>
 
                     </PriceDetail>
 
