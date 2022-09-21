@@ -132,8 +132,6 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-// const RemoveItem = <DeleteIcon />;
-
 
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
