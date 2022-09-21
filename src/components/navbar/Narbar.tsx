@@ -1,8 +1,12 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { useContext } from "react";
+import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import styled, { ThemeContext } from "styled-components";
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { light, dark } from "../../context/theme.context";
 
 const Container = styled.div`
   height: 60px;
@@ -37,8 +41,23 @@ const MenuItem = styled.div`
   margin-left: 25px;
 `;
 
+const Button = styled.div`
+  cursor: pointer;
+  padding : 20px;
+  top : 2px;
+`;
+let moon = <Brightness7Icon />;
+let sun = <Brightness4Icon/>;
+let x = true;
+
 const Navbar = () => {
   const navigate = useNavigate();
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  function lightDark() {
+    setTheme(theme === light ? dark : light);
+    x = !x;
+  }
 
   return (
     <Container>
@@ -50,10 +69,11 @@ const Navbar = () => {
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
           <MenuItem onClick={() => {navigate('/login')}}>SIGN IN</MenuItem>
           <MenuItem onClick={() => {navigate('/cart')}}>
-            <Badge color="primary">
+            <Badge color="primary" overlap="rectangular">
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
+          <Button onClick={lightDark}>{x ? sun : moon}</Button>
         </Right>
       </Wrapper>
     </Container>
@@ -61,3 +81,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

@@ -100,8 +100,8 @@ import Product from "../../models/Product";
   export const ProductCard = (props: productProps) => {
 
     const { cart, setCart } = useContext(CartContext);
-
-    const [quant ,setQuant] = useState('1');
+    
+    const [quant,setQuant] = useState('1');
 
     const [inCart, setInCart] = useState(0);
 
