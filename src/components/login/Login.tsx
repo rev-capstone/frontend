@@ -115,6 +115,7 @@ export default function Login() {
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
+          </Grid>
           </Box>
         </Box>
     </Container></>
