@@ -3,7 +3,7 @@ import {
     ShoppingCartOutlined,
   } from "@material-ui/icons";
 import { Box } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
@@ -105,6 +105,16 @@ import Product from "../../models/Product";
 
     const [quant ,setQuant] = useState('1');
 
+    const [inCart, setInCart] = useState(0);
+
+    useEffect(()=>{
+      const currentCart = [...cart]
+      for(var x = 0; x < currentCart.length;x++){
+        if(currentCart[x].id === props.product.id){
+          setInCart(currentCart[x].quantity);
+        }
+      }}, [cart, props.product.id]);
+
     const[open, setOpen] = useState(false);
 
     const[stockOpen, setStockOpen] = useState(false);
@@ -128,15 +138,14 @@ import Product from "../../models/Product";
       const index = newCart.findIndex((searchProduct) => {
         return searchProduct.id === product.id
       })
-
         if (index === -1) {
           if(Number(quant) > props.product.quantity) { setStockOpen(true);}
-          else {newCart.push(product); setOpen(true);}
+          else {newCart.push(product); setOpen(true); setInCart(product.quantity)}
         }
         else {
           
           if(Number(quant) + newCart[index].quantity >props.product.quantity){ setStockOpen(true);}
-          else {newCart[index].quantity += product.quantity; setOpen(true);}
+          else {newCart[index].quantity += product.quantity; setOpen(true); setInCart(newCart[index].quantity)}
         }
   
         setCart(newCart) 
@@ -177,7 +186,7 @@ import Product from "../../models/Product";
               
               )}} />
           </Icon>
-          <Stock>Stock: {props.product.quantity}</Stock>
+          <Stock>Stock: {props.product.quantity-inCart}</Stock>
         </Info>
         
         <Snackbar 
