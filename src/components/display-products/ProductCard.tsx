@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 
+
   const Info = styled.div`
     opacity: 0;
     width: 100%;
@@ -75,6 +76,7 @@ import Product from "../../models/Product";
   
 
   export const ProductCard = (props: productProps) => {
+    
     const { cart, setCart } = useContext(CartContext);
 
     const [quant ,setQuant] = useState('1');
@@ -83,6 +85,7 @@ import Product from "../../models/Product";
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
+      console.log(event.target.value);
     }
 
     const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
@@ -94,7 +97,7 @@ import Product from "../../models/Product";
     };
 
     const addItemToCart = (product: Product) => {
-
+      
       setOpen(true);
 
       const newCart = [...cart]
@@ -102,10 +105,19 @@ import Product from "../../models/Product";
         return searchProduct.id === product.id
       })
 
-      if (index === -1) newCart.push(product)
-      else newCart[index].quantity += product.quantity
-
-      setCart(newCart)
+        if (index === -1) {
+          if(Number(quant) > props.product.quantity) console.log("too manyy items")
+          else newCart.push(product)
+        }
+        else {
+          
+          if(Number(quant) + newCart[index].quantity >props.product.quantity) console.log("too manyy items")
+          else newCart[index].quantity += product.quantity
+        }
+  
+        setCart(newCart) 
+      
+      
     }
 
     return (
@@ -130,7 +142,9 @@ import Product from "../../models/Product";
         </Box>
           <Icon>
             <ShoppingCartOutlined onClick={() => {
+              
               if(Number(quant)>0) addItemToCart({...props.product, quantity: Number(quant) }
+              
               )}} />
           </Icon>
         </Info>

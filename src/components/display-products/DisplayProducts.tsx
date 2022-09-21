@@ -14,15 +14,18 @@ const Container = styled.div`
 
 export const DisplayProducts = () => {
 
+    
   const [products, setProducts] = useState<Product[]>([])
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const result = await apiGetAllProducts()
       setProducts(result.payload)
     }
     fetchData()
+    
   }, [])
+  
   // const products: Product[] = [
   //   {
   //       id:1,
