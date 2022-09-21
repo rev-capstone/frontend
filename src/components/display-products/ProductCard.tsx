@@ -83,6 +83,8 @@ import Product from "../../models/Product";
 
     const[open, setOpen] = useState(false);
 
+    const[stockOpen, setStockOpen] = useState(false);
+
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setQuant(event.target.value);
       console.log(event.target.value);
@@ -92,13 +94,11 @@ import Product from "../../models/Product";
       if (reason === 'clickaway') {
         return;
       }
-  
+      setStockOpen(false);
       setOpen(false);
     };
 
     const addItemToCart = (product: Product) => {
-      
-      setOpen(true);
 
       const newCart = [...cart]
       const index = newCart.findIndex((searchProduct) => {
@@ -106,13 +106,13 @@ import Product from "../../models/Product";
       })
 
         if (index === -1) {
-          if(Number(quant) > props.product.quantity) console.log("too manyy items")
-          else newCart.push(product)
+          if(Number(quant) > props.product.quantity) {console.log("too many items"); setStockOpen(true);}
+          else {newCart.push(product); setOpen(true);}
         }
         else {
           
-          if(Number(quant) + newCart[index].quantity >props.product.quantity) console.log("too manyy items")
-          else newCart[index].quantity += product.quantity
+          if(Number(quant) + newCart[index].quantity >props.product.quantity){console.log("too many items"); setStockOpen(true);}
+          else {newCart[index].quantity += product.quantity; setOpen(true);}
         }
   
         setCart(newCart) 
@@ -152,7 +152,13 @@ import Product from "../../models/Product";
           open={open}
           autoHideDuration={4000}
           onClose={handleClose}
-          message="Item added to cart"
+          message="added to cart"
+          />
+         <Snackbar 
+          open={stockOpen}
+          autoHideDuration={4000}
+          onClose={handleClose}
+          message="Not enough of this item in stock"
           />
       </Container>
     );
