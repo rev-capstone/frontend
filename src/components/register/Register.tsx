@@ -57,7 +57,7 @@ export default function Register() {
         
       } catch (error: any) {
         
-        if(error.code === "ERR_BAD_REQUEST"){
+        if(error.response.status === 409){
           setErrormessage({...errorMessage, errmessage: "An account has already been registered with this email!"});
           setVisible({...visible, visibility: true})
 
