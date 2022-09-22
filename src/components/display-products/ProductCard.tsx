@@ -111,7 +111,6 @@ const Stock = styled.div`
   `;
 
 
-
 interface productProps {
   product: Product,
   key: number
@@ -198,7 +197,7 @@ export const ProductCard = (props: productProps) => {
               inputMode: 'numeric',
               min: '0',
             }}
-            defaultValue="1" 
+            defaultValue="1"
             variant="filled"
             onChange={handleChange}
           />
