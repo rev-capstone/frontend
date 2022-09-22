@@ -22,7 +22,7 @@ const theme = createTheme();
 const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 const nameRegex = new RegExp( /^[a-zA-Z\s]*$/);
 //Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character: 
-const passRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/);
+const passRegex = new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&`~<>\-_#^=+.,])[A-Za-z\d@$!%*?&`~<>\-_#^=+.,]{8,}$/);
 
 export default function Register() {
 
@@ -92,6 +92,7 @@ export default function Register() {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  inputProps={{maxLength: 255}}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -103,6 +104,7 @@ export default function Register() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                  inputProps={{maxLength: 255}}
                   required
                   fullWidth
                   id="lastName"
@@ -113,6 +115,7 @@ export default function Register() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  inputProps={{maxLength: 255}}
                   required
                   fullWidth
                   id="email"
@@ -124,6 +127,7 @@ export default function Register() {
               <Grid item xs={12}>
               <Tooltip title="Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character" placement="right-start">
                 <TextField
+                  inputProps={{maxLength: 255}}
                   required
                   fullWidth
                   name="password"

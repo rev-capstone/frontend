@@ -5,6 +5,7 @@ import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import Navbar from "../navbar/Narbar";
 import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { TextField } from "@material-ui/core";
 import { Box } from "@mui/material";
 
@@ -35,6 +36,12 @@ const TopButton = styled.button`
 const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const DeleteIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 `;
 
 const Info = styled.div`
@@ -86,12 +93,13 @@ const PriceDetail = styled.div`
 const ProductAmountContainer = styled.span`
   display: flex;
   align-items: center;
-  margin: 10px;
+  margin: 5px;
 `;
 
 const ProductAmount = styled.div`
-  font-size: 24px;
-  margin: 5px;
+  font-size: 30px;
+  font-weight: 200;
+  margin-left: 20px;
 `;
 
 const ProductPrice = styled.span`
@@ -148,8 +156,8 @@ export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
-  
-  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let product: string = event.target.id;
     const newCart = [...cart]
     const index = newCart.findIndex((searchProduct) => {
@@ -173,6 +181,18 @@ export const Cart = () => {
     setCart(newCart)
   }
 
+  const removeOneItemFromCart = (product: Product) => {
+
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.id === product.id
+    })
+
+    newCart[index].quantity > 1 ? newCart[index].quantity-- : newCart.splice(index, 1);
+
+    setCart(newCart)
+  }
+
 
   return (
     <Container>
@@ -180,13 +200,12 @@ export const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton onClick={() => {navigate('/')}}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => {if(!(cart.length === 0)){navigate('/checkout')}}}>CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => { navigate('/') }}>CONTINUE SHOPPING</TopButton>
         </Top>
         <Bottom>
           <Info>
             {
-              cart.map((product)=> (
+              cart.map((product) => (
                 <>
                   <ProductItem>
                     <ProductDetail>
@@ -199,31 +218,22 @@ export const Cart = () => {
                           <b>ID:</b> {product.id}
                         </ProductId>
                       </Details>
-                    </ProductDetail> 
+                    </ProductDetail>
                     <PriceDetail>
-                    <ProductPrice>$ {product.price}</ProductPrice>
+                      <ProductPrice>$ {product.price}</ProductPrice>
                       <ProductAmountContainer>
-                       <Box component="form" sx={{backgroundColor:'#f5fbfd', borderRadius:1, width:'70px'}}>
-                        <TextField
-                        id = {product.name}
-                        label="Quantity"
-                        type="number"
-                        inputProps={{
-                          inputMode: 'numeric',
-                          min: '0'
-                        }}
-                        defaultValue = {product.quantity}
-                        variant="outlined"
-                        onChange={handleChange}
-                        />
-                       </Box>
+                        <ProductAmount>
+                          Qty: {product.quantity}
+                        </ProductAmount>
                       </ProductAmountContainer>
-                   <DeleteIcon onClick={() => removeItemFromCart(product)}></DeleteIcon>
-
+                      <DeleteIconContainer>
+                        <DeleteIcon onClick={() => removeOneItemFromCart(product)}></DeleteIcon>
+                        <DeleteForeverIcon onClick={() => removeItemFromCart(product)}></DeleteForeverIcon>
+                      </DeleteIconContainer>
                     </PriceDetail>
 
                   </ProductItem>
-                  <Hr/>
+                  <Hr />
                 </>
               ))
             }
@@ -232,8 +242,8 @@ export const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 
-                  {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
+              <SummaryItemPrice>$
+                {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
               </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
@@ -246,11 +256,11 @@ export const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 
+              <SummaryItemPrice>$
                 {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
               </SummaryItemPrice>
             </SummaryItem>
-            <Button onClick={() => {if(!(cart.length === 0)){navigate('/checkout')}}}>CHECKOUT NOW</Button>
+            <Button onClick={() => { if (!(cart.length === 0)) { navigate('/checkout') } }}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
