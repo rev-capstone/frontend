@@ -53,7 +53,7 @@ export default function Register() {
     else{
       try {
       const response = await apiRegister(`${data.get('firstName')}`, `${data.get('lastName')}`, `${data.get('email')}`, `${data.get('password')}`)
-      if (response.status >= 200 && response.status < 300) {navigate('/login')}
+      if (response.status >= 200 && response.status < 300) {navigate('/')}
         
       } catch (error: any) {
         
@@ -153,7 +153,7 @@ export default function Register() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="login" variant="body2">
+                <Link href="/" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

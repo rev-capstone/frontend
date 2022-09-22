@@ -199,7 +199,7 @@ export const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton onClick={() => { navigate('/') }}>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={() => { navigate('/products') }}>CONTINUE SHOPPING</TopButton>
           <TopButton onClick={() => { if (!(cart.length === 0)) { navigate('/checkout') } }}>CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
