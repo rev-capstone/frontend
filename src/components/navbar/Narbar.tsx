@@ -1,12 +1,11 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
 import React, { useContext } from "react";
-import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeContext } from "styled-components";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { light, dark } from "../../context/theme.context";
+import { light, dark,  } from "../../context/theme.context";
 
 const Container = styled.div`
   height: 60px;
@@ -48,15 +47,19 @@ const Button = styled.div`
 `;
 let moon = <Brightness7Icon />;
 let sun = <Brightness4Icon/>;
-let x = true;
+let x = false;
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useContext(ThemeContext);
 
   function lightDark() {
+    console.log("before switch");
+    console.log(theme.palette.type);
     setTheme(theme === light ? dark : light);
     x = !x;
+    console.log("after");
+    console.log(theme.palette.type);
   }
 
   return (
@@ -73,7 +76,7 @@ const Navbar = () => {
               <ShoppingCartOutlined />
             </Badge>
           </MenuItem>
-          <Button onClick={lightDark}>{x ? sun : moon}</Button>
+          <Button onClick={lightDark}>{x ? sun :moon}</Button>
         </Right>
       </Wrapper>
     </Container>

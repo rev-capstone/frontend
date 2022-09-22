@@ -5,9 +5,9 @@ import { CartContext } from './context/cart.context';
 import ProductItem from './models/Product';
 import { AppRoutes } from './router/AppRoutes';
 import { Theme, ThemeProvider } from '@material-ui/core/styles'
-import { ThemeContext } from 'styled-components';
-import { dark, light } from './context/theme.context';
+import { dark, light} from './context/theme.context';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeContext } from 'styled-components';
 
 function App() {
   
