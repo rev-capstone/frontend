@@ -10,7 +10,7 @@ import { dark, light } from './context/theme.context';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 function App() {
-  
+  document.title = "Coder's Closet";
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
 

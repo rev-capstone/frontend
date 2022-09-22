@@ -93,12 +93,13 @@ const PriceDetail = styled.div`
 const ProductAmountContainer = styled.span`
   display: flex;
   align-items: center;
-  margin: 10px;
+  margin: 5px;
 `;
 
 const ProductAmount = styled.div`
-  font-size: 24px;
-  margin: 5px;
+  font-size: 30px;
+  font-weight: 200;
+  margin-left: 20px;
 `;
 
 const ProductPrice = styled.span`
