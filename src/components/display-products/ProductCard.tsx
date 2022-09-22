@@ -66,8 +66,6 @@ const Icon = styled.div`
     &:hover {
       background-color: #e9f5f5;
       transform: scale(1.1)
-
-
   `;
 const Stock = styled.div`
     width: 100px;
@@ -83,11 +81,9 @@ const Stock = styled.div`
     color: black;
     text-align: center;
     font-weight: bold;
-
     position: absolute;
     bottom: 5px;
     right: 5px;
-
   `;
   const Price = styled.div`
     width: 100px;
@@ -103,11 +99,9 @@ const Stock = styled.div`
     color: black;
     text-align: center;
     font-weight: bold;
-
     position: absolute;
     bottom: 5px;
     left: 5px;
-
   `;
 
 
@@ -118,6 +112,7 @@ interface productProps {
 
 
 export const ProductCard = (props: productProps) => {
+  const el = document.getElementById("price");
 
   const { cart, setCart } = useContext(CartContext);
 
@@ -133,6 +128,16 @@ export const ProductCard = (props: productProps) => {
       }
     }
   }, [cart, props.product.id]);
+
+  function price(){
+    
+    console.log(props.product.price);
+    var priceCheck = new String("$"+props.product.price.toFixed(2))
+    return priceCheck
+/*  }else{
+     el.style.display = "none"; 
+ } */
+  } 
 
   const [open, setOpen] = useState(false);
 
@@ -211,7 +216,7 @@ export const ProductCard = (props: productProps) => {
               )}} />
           </Icon>
           <Stock>Stock: {props.product.quantity-inCart}</Stock>
-          <Price>${props.product.price.toFixed(2)} </Price>
+          <Price id="price">{price()} </Price>
         </Info>
 
       <Snackbar
