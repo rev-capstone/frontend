@@ -89,6 +89,27 @@ import Product from "../../models/Product";
     right: 5px;
 
   `;
+  const Price = styled.div`
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    transition: all 0.5s ease;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+  `;
+
 
 
   interface productProps {
@@ -104,6 +125,7 @@ import Product from "../../models/Product";
     const [quant,setQuant] = useState('1');
 
     const [inCart, setInCart] = useState(0);
+   
 
     useEffect(()=>{
       const currentCart = [...cart]
@@ -151,6 +173,10 @@ import Product from "../../models/Product";
 
     }
 
+    function priceDetails(){
+      console.log(props.product.price)
+    }
+
     return (
 
       <Container>
@@ -185,6 +211,7 @@ import Product from "../../models/Product";
               )}} />
           </Icon>
           <Stock>Stock: {props.product.quantity-inCart}</Stock>
+          <Price>${props.product.price.toFixed(2)} </Price>
         </Info>
 
         <Snackbar
