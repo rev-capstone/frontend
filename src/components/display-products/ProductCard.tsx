@@ -89,6 +89,27 @@ const Stock = styled.div`
     right: 5px;
 
   `;
+  const Price = styled.div`
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    transition: all 0.5s ease;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+  `;
+
 
 
 interface productProps {
@@ -152,7 +173,11 @@ export const ProductCard = (props: productProps) => {
 
   }
 
-  return (
+    function priceDetails(){
+      console.log(props.product.price)
+    }
+
+    return (
 
     <Container>
 
@@ -184,11 +209,11 @@ export const ProductCard = (props: productProps) => {
 
             if (Number(quant) > 0) addItemToCart({ ...props.product, quantity: Number(quant) }
 
-            )
-          }} />
-        </Icon>
-        <Stock>Stock: {props.product.quantity - inCart}</Stock>
-      </Info>
+              )}} />
+          </Icon>
+          <Stock>Stock: {props.product.quantity-inCart}</Stock>
+          <Price>${props.product.price.toFixed(2)} </Price>
+        </Info>
 
       <Snackbar
         open={open}
