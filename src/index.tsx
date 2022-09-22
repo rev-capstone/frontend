@@ -15,17 +15,22 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ModeComment } from '@material-ui/icons';
 import Narbar from './components/navbar/Narbar';
 
+import { dark } from './context/theme.context';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-    <>
-    <React.StrictMode>
+  <ThemeProvider theme={dark}>
+  <CssBaseline />
+  <React.StrictMode>
 
-    <App />
-  </React.StrictMode></>
+    <App/>
+  </React.StrictMode>
+</ThemeProvider>
 
 );
+
 
 
 // If you want to start measuring performance in your app, pass a function
