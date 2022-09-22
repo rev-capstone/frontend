@@ -36,7 +36,7 @@ export default function Login() {
       try{
         const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`);
 
-        if (response.status >= 200 && response.status < 300) navigate('/')
+        if (response.status >= 200 && response.status < 300) navigate('/products')
       }
 
       catch(error: any){

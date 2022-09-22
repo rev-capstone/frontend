@@ -63,7 +63,7 @@ const Navbar = () => {
     <Container>
       <Wrapper>
         <Left>
-        <Logo onClick={() => {navigate('/')}}>Coder's Closet</Logo>
+        <Logo onClick={() => {navigate('/products')}}>Coder's Closet</Logo>
         </Left>
         <Right>
           <MenuItem onClick={() => {navigate('/register')}}>REGISTER</MenuItem>
