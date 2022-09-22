@@ -201,7 +201,6 @@ export const Cart = () => {
         <Title>YOUR BAG</Title>
         <Top>
           <TopButton onClick={() => { navigate('/') }}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => { if (!(cart.length === 0)) { navigate('/checkout') } }}>CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
