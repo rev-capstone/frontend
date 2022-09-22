@@ -74,6 +74,7 @@ export default function Login() {
         </Typography>
         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
           <TextField
+            inputProps={{maxLength: 255}}
             margin="normal"
             required
             fullWidth
@@ -86,6 +87,7 @@ export default function Login() {
               backgroundColor: "#ffffff"
             }} />
           <TextField
+            inputProps={{maxLength: 255}}
             margin="normal"
             required
             fullWidth

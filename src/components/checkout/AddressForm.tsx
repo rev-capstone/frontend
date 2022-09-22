@@ -83,6 +83,7 @@ export default function AddressForm(props: addressFormProps) {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
+              inputProps={{maxLength: 255}}
               required
               id="firstName"
               name="firstName"
@@ -94,6 +95,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              inputProps={{maxLength: 255}}
               required
               id="lastName"
               name="lastName"
@@ -105,6 +107,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              inputProps={{maxLength: 255}}
               required
               id="address1"
               name="address1"
@@ -116,6 +119,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12}>
             <TextField
+              inputProps={{maxLength: 255}}
               id="address2"
               name="address2"
               label="Address line 2"
@@ -126,6 +130,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              inputProps={{maxLength: 255}}
               required
               id="city"
               name="city"
@@ -137,6 +142,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              inputProps={{maxLength: 255}}
               required
               id="state"
               name="state"
@@ -147,6 +153,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              inputProps={{maxLength: 255}}
               required
               id="zip"
               name="zip"
@@ -158,6 +165,7 @@ export default function AddressForm(props: addressFormProps) {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
+              inputProps={{maxLength: 255}}
               id="country"
               name="country"
               label="Country"
