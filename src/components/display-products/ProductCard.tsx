@@ -1,7 +1,7 @@
 import { Snackbar, TextField } from "@material-ui/core";
 import {
-    ShoppingCartOutlined,
-  } from "@material-ui/icons";
+  ShoppingCartOutlined,
+} from "@material-ui/icons";
 import { Alert, Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
@@ -9,7 +9,7 @@ import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 
 
-  const Info = styled.div`
+const Info = styled.div`
     opacity: 0;
     width: 100%;
     height: 100%;
@@ -25,7 +25,7 @@ import Product from "../../models/Product";
     cursor: pointer;
   `;
 
-  const Container = styled.div`
+const Container = styled.div`
     flex: 1;
     margin: 5px;
     min-width: 280px;
@@ -40,7 +40,7 @@ import Product from "../../models/Product";
     }
   `;
 
-  const Circle = styled.div`
+const Circle = styled.div`
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -48,16 +48,16 @@ import Product from "../../models/Product";
     position: absolute;
   `;
 
-  const Image = styled.img`
+const Image = styled.img`
     height: 75%;
     z-index: 2;
   `;
 
-  const Icon = styled.div`
+const Icon = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: white;
+    background-color: #989898;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -69,7 +69,7 @@ import Product from "../../models/Product";
 
 
   `;
-  const Stock = styled.div`
+const Stock = styled.div`
     width: 100px;
     height: 40px;
     border-radius: 20px;
@@ -89,122 +89,150 @@ import Product from "../../models/Product";
     right: 5px;
 
   `;
+  const Price = styled.div`
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    transition: all 0.5s ease;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+
+  `;
 
 
-  interface productProps {
-      product: Product,
-      key: number
+
+interface productProps {
+  product: Product,
+  key: number
+}
+
+
+export const ProductCard = (props: productProps) => {
+
+  const { cart, setCart } = useContext(CartContext);
+
+  const [quant, setQuant] = useState('1');
+
+  const [inCart, setInCart] = useState(0);
+
+  useEffect(() => {
+    const currentCart = [...cart]
+    for (var x = 0; x < currentCart.length; x++) {
+      if (currentCart[x].id === props.product.id) {
+        setInCart(currentCart[x].quantity);
+      }
+    }
+  }, [cart, props.product.id]);
+
+  const [open, setOpen] = useState(false);
+
+  const [stockOpen, setStockOpen] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setQuant(event.target.value);
+
   }
 
+  const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setStockOpen(false);
+    setOpen(false);
+  };
 
-  export const ProductCard = (props: productProps) => {
+  const addItemToCart = (product: Product) => {
 
-    const { cart, setCart } = useContext(CartContext);
-    
-    const [quant,setQuant] = useState('1');
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.id === product.id
+    })
+    if (index === -1) {
+      if (Number(quant) > props.product.quantity) { setStockOpen(true); }
+      else { newCart.push(product); setOpen(true); setInCart(product.quantity) }
+    }
+    else {
 
-    const [inCart, setInCart] = useState(0);
-
-    useEffect(()=>{
-      const currentCart = [...cart]
-      for(var x = 0; x < currentCart.length;x++){
-        if(currentCart[x].id === props.product.id){
-          setInCart(currentCart[x].quantity);
-        }
-      }}, [cart, props.product.id]);
-
-    const[open, setOpen] = useState(false);
-
-    const[stockOpen, setStockOpen] = useState(false);
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setQuant(event.target.value);
-
+      if (Number(quant) + newCart[index].quantity > props.product.quantity) { setStockOpen(true); }
+      else { newCart[index].quantity += product.quantity; setOpen(true); setInCart(newCart[index].quantity) }
     }
 
-    const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
-      if (reason === 'clickaway') {
-        return;
-      }
-      setStockOpen(false);
-      setOpen(false);
-    };
-
-    const addItemToCart = (product: Product) => {
-
-      const newCart = [...cart]
-      const index = newCart.findIndex((searchProduct) => {
-        return searchProduct.id === product.id
-      })
-        if (index === -1) {
-          if(Number(quant) > props.product.quantity) { setStockOpen(true);}
-          else {newCart.push(product); setOpen(true); setInCart(product.quantity)}
-        }
-        else {
-
-          if(Number(quant) + newCart[index].quantity >props.product.quantity){ setStockOpen(true);}
-          else {newCart[index].quantity += product.quantity; setOpen(true); setInCart(newCart[index].quantity)}
-        }
-
-        setCart(newCart)
+    setCart(newCart)
 
 
+  }
+
+    function priceDetails(){
+      console.log(props.product.price)
     }
 
     return (
 
-      <Container>
+    <Container>
 
-        <Circle />
-        <Image src={props.product.image} />
+      <Circle />
+      <Image src={props.product.image} />
 
-        <Info>
+      <Info>
 
-        <Box sx={{backgroundColor:'#f5fbfd',borderRadius:1,width: '30%'}}>
+        <Box sx={{ backgroundColor: '#f5fbfd', borderRadius: 1, width: '30%' }}>
 
           <TextField
             id="Quantity"
+            style={{backgroundColor:'#989898'}}
             label="Quantity"
             type="number"
             size="small"
             inputProps={{
               inputMode: 'numeric',
-              min: '0'
+              min: '0',
             }}
-            defaultValue="1"
+            defaultValue="1" 
             variant="filled"
             onChange={handleChange}
           />
         </Box>
         {/* <Stock></Stock> */}
-          <Icon>
-            <ShoppingCartOutlined onClick={() => {
+        <Icon>
+          <ShoppingCartOutlined onClick={() => {
 
-              if(Number(quant)>0) addItemToCart({...props.product, quantity: Number(quant) }
+            if (Number(quant) > 0) addItemToCart({ ...props.product, quantity: Number(quant) }
 
               )}} />
           </Icon>
           <Stock>Stock: {props.product.quantity-inCart}</Stock>
+          <Price>${props.product.price.toFixed(2)} </Price>
         </Info>
 
-        <Snackbar
-          open={open}
-          autoHideDuration={4000}
-          >
+      <Snackbar
+        open={open}
+        autoHideDuration={4000}
+      >
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Added item to cart!
         </Alert>
-        </Snackbar>
+      </Snackbar>
 
-        <Snackbar
-          open={stockOpen}
-          autoHideDuration={1000}
-          onClose={handleClose}
-          >
+      <Snackbar
+        open={stockOpen}
+        autoHideDuration={1000}
+        onClose={handleClose}
+      >
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-            Amount in cart over stock!
+          Amount in cart over stock!
         </Alert>
-        </Snackbar>
-      </Container>
-    );
-  };
+      </Snackbar>
+    </Container>
+  );
+};
