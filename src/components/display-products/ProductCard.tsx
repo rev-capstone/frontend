@@ -217,7 +217,9 @@ export const ProductCard = (props: productProps) => {
 
       <Snackbar
         open={open}
-        autoHideDuration={4000}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        anchorOrigin={{vertical:"top",horizontal:"center"}}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           Added item to cart!
@@ -226,8 +228,9 @@ export const ProductCard = (props: productProps) => {
 
       <Snackbar
         open={stockOpen}
-        autoHideDuration={1000}
+        autoHideDuration={2000}
         onClose={handleClose}
+        anchorOrigin={{vertical:"top",horizontal:"center"}}
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           Amount in cart over stock!
