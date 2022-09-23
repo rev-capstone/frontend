@@ -10,6 +10,7 @@ import Address from '../../models/Address';
 import { Box, Button } from '@mui/material';
 import { apiPurchase } from '../../remote/e-commerce-api/productService';
 import { CartContext } from '../../context/cart.context';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -21,7 +22,7 @@ interface reviewProps {
 }
 
 export default function Review(props: reviewProps) {
-
+  const navigate = useNavigate();
   const {cart, setCart} = React.useContext(CartContext)
 
   const handleSubmit = (event: React.MouseEvent) => {

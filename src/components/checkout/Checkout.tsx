@@ -19,6 +19,7 @@ import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Narbar';
+import { Box, Button } from '@material-ui/core';
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -46,7 +47,6 @@ const theme = createTheme();
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const { cart, setCart } = useContext(CartContext);
-  const navigate = useNavigate();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -76,7 +76,7 @@ export default function Checkout() {
         throw new Error('Unknown step');
     }
   }
-
+  const navigate = useNavigate();
   return (
       <><Navbar /><AppBar
       position="absolute"
@@ -117,6 +117,9 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
+        <Box>
+                <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
+                </Box>
       </Container></>
   );
 }
