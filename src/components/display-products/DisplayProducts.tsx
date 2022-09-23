@@ -76,7 +76,7 @@ export const DisplayProducts = () => {
       });
     } else if (sortBy === "priceDESC") {
       copyArray.sort((a, b) => {
-        return a.quantity > b.quantity ? 1 : -1;
+        return a.price < b.price ? 1 : -1;
       });
     } else if (sortBy === "quantityASC") {
       copyArray.sort((a, b) => {
