@@ -1,8 +1,13 @@
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
+import Product from "../../models/Product";
 import Navbar from "../navbar/Narbar";
+import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { TextField } from "@material-ui/core";
+import { Box } from "@mui/material";
 
 const Container = styled.div``;
 
@@ -33,11 +38,17 @@ const Bottom = styled.div`
   justify-content: space-between;
 `;
 
+const DeleteIconContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
+
 const Info = styled.div`
   flex: 3;
 `;
 
-const Product = styled.div`
+const ProductItem = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -73,23 +84,25 @@ const ProductSize = styled.span``;
 const PriceDetail = styled.div`
   flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-family: Roboto;
 `;
 
-const ProductAmountContainer = styled.div`
+const ProductAmountContainer = styled.span`
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-`;
-
-const ProductAmount = styled.div`
-  font-size: 24px;
   margin: 5px;
 `;
 
-const ProductPrice = styled.div`
+const ProductAmount = styled.div`
+  font-size: 30px;
+  font-weight: 200;
+  margin-left: 20px;
+`;
+
+const ProductPrice = styled.span`
   font-size: 30px;
   font-weight: 200;
 `;
@@ -130,10 +143,56 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
+const RemoveItem = styled.button`
+  width: 10%;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+`;
+
+
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
 
   const navigate = useNavigate();
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let product: string = event.target.id;
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.name === product
+    })
+
+    newCart[index].quantity = parseInt(event.target.value);
+
+    setCart(newCart)
+  }
+
+  const removeItemFromCart = (product: Product) => {
+
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.id === product.id
+    })
+
+    newCart.splice(index, 1);
+
+    setCart(newCart)
+  }
+
+  const removeOneItemFromCart = (product: Product) => {
+
+    const newCart = [...cart]
+    const index = newCart.findIndex((searchProduct) => {
+      return searchProduct.id === product.id
+    })
+
+    newCart[index].quantity > 1 ? newCart[index].quantity-- : newCart.splice(index, 1);
+
+    setCart(newCart)
+  }
+
 
   return (
     <Container>
@@ -141,15 +200,15 @@ export const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton onClick={() => {navigate('/')}}>CONTINUE SHOPPING</TopButton>
-          <TopButton onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</TopButton>
+          <TopButton onClick={() => { navigate('/products') }}>CONTINUE SHOPPING</TopButton>
+          {/* <TopButton onClick={() => { if (!(cart.length === 0)) { navigate('/checkout') } }}>CHECKOUT NOW</TopButton> */}
         </Top>
         <Bottom>
           <Info>
             {
-              cart.map((product)=> (
+              cart.map((product) => (
                 <>
-                  <Product>
+                  <ProductItem>
                     <ProductDetail>
                       <Image src={product.image} />
                       <Details>
@@ -162,13 +221,20 @@ export const Cart = () => {
                       </Details>
                     </ProductDetail>
                     <PriceDetail>
-                      <ProductAmountContainer>
-                        <ProductAmount> {product.quantity} </ProductAmount>
-                      </ProductAmountContainer>
                       <ProductPrice>$ {product.price}</ProductPrice>
+                      <ProductAmountContainer>
+                        <ProductAmount>
+                          Qty: {product.quantity}
+                        </ProductAmount>
+                      </ProductAmountContainer>
+                      <DeleteIconContainer>
+                        <DeleteIcon onClick={() => removeOneItemFromCart(product)}></DeleteIcon>
+                        <DeleteForeverIcon onClick={() => removeItemFromCart(product)}></DeleteForeverIcon>
+                      </DeleteIconContainer>
                     </PriceDetail>
-                  </Product>
-                  <Hr/>
+
+                  </ProductItem>
+                  <Hr />
                 </>
               ))
             }
@@ -177,8 +243,8 @@ export const Cart = () => {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 
-                  {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
+              <SummaryItemPrice>$
+                {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
               </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
@@ -191,11 +257,11 @@ export const Cart = () => {
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 
+              <SummaryItemPrice>$
                 {cart.reduce<number>((total, product) => total + product.price * product.quantity, 0)}
               </SummaryItemPrice>
             </SummaryItem>
-            <Button onClick={() => {navigate('/checkout')}}>CHECKOUT NOW</Button>
+            <Button onClick={() => { if (!(cart.length === 0)) { navigate('/checkout') } }}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
