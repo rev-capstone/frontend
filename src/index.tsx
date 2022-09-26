@@ -14,7 +14,6 @@ import { createTheme } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ModeComment } from '@material-ui/icons';
 import Narbar from './components/navbar/Narbar';
-
 import { dark } from './context/theme.context';
 
 const root = ReactDOM.createRoot(
@@ -24,10 +23,11 @@ root.render(
   <ThemeProvider theme={dark}>
   <CssBaseline />
   <React.StrictMode>
-
+ 
     <App/>
   </React.StrictMode>
 </ThemeProvider>
+
 
 );
 

@@ -20,8 +20,24 @@ import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Narbar';
 import { Box, Button } from '@material-ui/core';
+import styled from "styled-components";
+
+const Footer = styled.h1`
+color: #979797;
+text-align: center;
+margin-top: 185px;
+padding: 30px 10px;
+font-weight: 700;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+justify-content: center;
+font-size: 14px;
+`;
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
+
 
 const products: Product[] = [
 ];
@@ -120,6 +136,7 @@ export default function Checkout() {
         <Box>
                 <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
                 </Box>
+                <Footer>Kev's Java/React Batch 2022 All rights reserved</Footer>
       </Container></>
   );
 }

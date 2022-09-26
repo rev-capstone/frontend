@@ -8,6 +8,8 @@ import { Theme, ThemeProvider } from '@material-ui/core/styles'
 import { ThemeContext } from 'styled-components';
 import { dark, light } from './context/theme.context';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import './styles/master.css';
+
 
 function App() {
   document.title = "Coder's Closet";
