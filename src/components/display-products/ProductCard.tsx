@@ -1,4 +1,4 @@
-import { Snackbar, TextField } from "@material-ui/core";
+import { FormControl, Snackbar, TextField } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
 import { Alert, Box } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
@@ -6,23 +6,23 @@ import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
+import { useFormControl } from '@mui/material/FormControl';
 
 
 const Info = styled.div`
     opacity: 0;
-    width: 100%;
-    height: 100%;
+    width: 98%;
+    height: 50px;
     position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    bottom:10px;
+    background-color: white;
+    border-radius: 15px;
     z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.5s ease;
     cursor: pointer;
-    background: transparent;
   `;
 
 const Container = styled.div`
@@ -66,13 +66,11 @@ const Icon = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 298px;
     // transition: all 0.
     // &:hover {
     //   background-color: #e9f5f5;
     //   transform: scale(1.1);
     background: transparent;
-    margin-right: 140px;
     z-index: 5;
     color: #EC5800;
 
@@ -80,8 +78,6 @@ const Icon = styled.div`
 const Stock = styled.div`
     width: 55%;
     height: 40px;
-    border-radius: 20px;
-    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,15 +87,10 @@ const Stock = styled.div`
     color: black;
     text-align: center;
     font-weight: bold;
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
   `;
   const Price = styled.div`
     width: 55%;
     height: 40px;
-    border-radius: 20px;
-    background-color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -109,14 +100,12 @@ const Stock = styled.div`
     color: black;
     text-align: center;
     font-weight: bold;
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
   `;
   const BoxContainer = styled.div`
       display: flex;
-      margin-top: 200px;
-      margin-left: 20px;
+      width: 80px;
+      color: black;
+      padding-left: 5px;
   `;
 
 
@@ -167,7 +156,7 @@ export const ProductCard = (props: productProps) => {
 
   function price(){
     
-    console.log(props.product.price);
+    // console.log(props.product.price);
     var priceCheck = new String("$"+props.product.price.toFixed(2))
     return priceCheck
 /*  }else{
@@ -224,28 +213,7 @@ export const ProductCard = (props: productProps) => {
       <Image src={props.product.image} />
 
       <Info>
-        <BoxContainer>
-        <TextField
-          id="Quantity"
-          style={{backgroundColor:'#989898'}}
-          label=""
-          type="number"
-          size="small"
-          inputProps={{
-            inputMode: 'numeric',
-            min: '0',
-          }}
-          defaultValue="1"
-          variant="filled"
-          onChange={handleChange}
-        />
-        </BoxContainer>
-
-        <Box sx={{ backgroundColor: '#f5fbfd', borderRadius: 1, width: '30%' }}>
-
-        
-        </Box>
-        {/* <Stock></Stock> */}
+        <Price id="price">{price()} </Price>
         <Icon>
           <ShoppingCartOutlined onClick={() => {
 
@@ -253,8 +221,26 @@ export const ProductCard = (props: productProps) => {
 
               )}} />
           </Icon>
+          <BoxContainer >
+              <TextField
+                id="Quantity"
+                style={{backgroundColor:'#989898',paddingLeft:'5px',paddingTop:'3px'}}
+                label=""
+                type="number"
+                size="small"
+                inputProps={{
+                  inputMode: 'numeric',
+                  min: '0',
+                }}
+
+                InputProps={{disableUnderline: true}}
+
+                defaultValue="1"
+                variant="standard"
+                onChange={handleChange}
+              />
+          </BoxContainer>
           <Stock>Stock: {props.product.quantity-inCart}</Stock>
-          <Price id="price">{price()} </Price>
         </Info>
 
       <Snackbar
