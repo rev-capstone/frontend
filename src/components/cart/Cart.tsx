@@ -206,7 +206,6 @@ export const Cart = () => {
     })
 
     newCart[index].quantity = parseInt(event.target.value);
-
     setCart(newCart)
   }
 
@@ -241,7 +240,7 @@ export const Cart = () => {
       return searchProduct.id === product.id
     })
 
-    newCart[index].quantity > 1 ? newCart[index].quantity++ : newCart.splice(index, 1);
+    newCart[index].quantity > 0 ? newCart[index].quantity++ : newCart.splice(index, 1);
 
     setCart(newCart)
   }

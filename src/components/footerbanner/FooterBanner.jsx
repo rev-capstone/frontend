@@ -4,7 +4,7 @@ import { ram } from '../../assets'
 const FooterBanner = () => {
   return (
   <>
-     <div className="footer-banner-container">
+     <div data-aos="zoom-in" data-aos-delay="300000" className="footer-banner-container">
      <div className="banner-desc">
       <div className="left">
       
