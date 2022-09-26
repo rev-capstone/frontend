@@ -228,7 +228,6 @@ export const Cart = () => {
     })
 
     newCart[index].quantity = parseInt(event.target.value);
-
     setCart(newCart)
   }
 

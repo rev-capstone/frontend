@@ -71,6 +71,7 @@ const Icon = styled.div`
     //   background-color: #e9f5f5;
     //   transform: scale(1.1);
     background: transparent;
+    margin-right: 170px;
     z-index: 5;
     color: #EC5800;
 
@@ -207,7 +208,9 @@ export const ProductCard = (props: productProps) => {
     }
 
     return (
-    <Container className="product-card">
+    <Container data-aos="fade-zoom-in"
+    data-aos-delay="100"
+    data-aos-offset="0" className="product-card">
 
       {/* <Circle /> */}
       <Image src={props.product.image} />

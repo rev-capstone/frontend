@@ -3,7 +3,9 @@ import { angularsolo } from '../../assets'
 
 const HeroBanner = () => {
   return (
-    <div className="hero-banner-container">
+    <div data-aos="fade-zoom-in"
+    data-aos-delay="300"
+    data-aos-offset="0" className="hero-banner-container">
         <p className="angular-solo">HEADPHONES</p>
         <h3>Now On Sale</h3>
         <h1>Angular</h1>
