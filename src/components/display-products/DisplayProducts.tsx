@@ -7,6 +7,7 @@ import Product from '../../models/Product';
 import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
 import Navbar from '../navbar/Narbar';
 import { ProductCard } from "./ProductCard";
+import {Footer, FooterBanner, HeroBanner } from '../../components';
 
 const Container = styled.div`
   padding-right: 15%;
@@ -16,6 +17,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
 `;
 
 const FilterContainer = styled.div`
@@ -32,20 +34,22 @@ const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  // justify-content: flex-end;
 `;
 
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-left: 200px;
 `;
 
 const DropdownContainer = styled.div`
   width: 50%;
   padding-left: 29%;
   padding-right: 1%;
-  border-right: solid 1px rgba(0, 0, 0, 0.87);
+  // border-right: solid 1px rgba(0, 0, 0, 0.87);
 `;
 
 const SearchContainer = styled.div`
@@ -168,6 +172,15 @@ export const DisplayProducts = () => {
   return (
     <React.Fragment>
       <Navbar />
+      
+      <HeroBanner/>
+  
+      <div className="products-heading">
+       
+        <h2>Luxury Products for Luxurious Coders</h2>
+        <p>A Full-Stack Developer's Dream</p>
+      </div>
+      <div>
       <FilterContainer>
         <Left>
           <DropdownContainer>
@@ -208,7 +221,11 @@ export const DisplayProducts = () => {
           <ProductCard product={item} key={item.id} />
         ))}
       </Container>
+      </div>
+      <FooterBanner />
+      <Footer />
     </React.Fragment>
+    
 
   );
 };

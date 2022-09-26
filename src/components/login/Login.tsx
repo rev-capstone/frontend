@@ -14,6 +14,7 @@ import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 import { Visibility } from '@material-ui/icons';
 import Navbar from '../navbar/Narbar';
+import { cis } from '../../assets';
 
 
 const theme = createTheme();
@@ -56,7 +57,8 @@ export default function Login() {
   };
   return (
 
-      <><Navbar /><Container component="main" maxWidth="xs">
+      <>
+        <Navbar /><Container style={{border: 'solid', marginTop: '130px', background: "rgba(225, 225, 225, 0.15)", borderRadius: 10,}} component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
@@ -119,6 +121,7 @@ export default function Login() {
           </Grid>
         </Box>
       </Box>
-    </Container></>
+    </Container>
+    </>
   );
 }
