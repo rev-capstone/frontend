@@ -62,6 +62,7 @@ const Navbar = () => {
   function lightDark() {
     setTheme(theme === light ? dark : light);
     x = !x;
+    console.log(theme);
   }
 
   async function logout(){

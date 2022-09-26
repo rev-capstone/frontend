@@ -11,6 +11,10 @@ import { Box, Button } from '@mui/material';
 import { apiPurchase } from '../../remote/e-commerce-api/productService';
 import { CartContext } from '../../context/cart.context';
 import { useNavigate } from 'react-router-dom';
+import { createTheme } from '@material-ui/core/styles';
+
+
+const theme = createTheme();
 
 
 
