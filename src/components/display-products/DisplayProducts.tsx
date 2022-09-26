@@ -216,7 +216,7 @@ export const DisplayProducts = () => {
           </SearchContainer>
         </Right>
       </FilterContainer>
-      <Container data-aos="zoom-in-down" id="product-container">
+      <Container id="product-container">
         {products.filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
           <ProductCard product={item} key={item.id} />
         ))}

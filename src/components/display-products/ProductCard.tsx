@@ -218,7 +218,9 @@ export const ProductCard = (props: productProps) => {
     }
 
     return (
-    <Container className="product-card">
+    <Container data-aos="fade-zoom-in"
+    data-aos-delay="100"
+    data-aos-offset="0" className="product-card">
 
       {/* <Circle /> */}
       <Image src={props.product.image} />
