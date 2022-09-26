@@ -71,7 +71,6 @@ const Icon = styled.div`
     //   background-color: #e9f5f5;
     //   transform: scale(1.1);
     background: transparent;
-    margin-right: 170px;
     z-index: 5;
     color: #EC5800;
 
@@ -156,14 +155,14 @@ export const ProductCard = (props: productProps) => {
   }, [cart, props.product.id]);
 
   function price(){
-    
+
     // console.log(props.product.price);
     var priceCheck = new String("$"+props.product.price.toFixed(2))
     return priceCheck
 /*  }else{
-     el.style.display = "none"; 
+     el.style.display = "none";
  } */
-  } 
+  }
 
   const [open, setOpen] = useState(false);
 
@@ -269,5 +268,5 @@ export const ProductCard = (props: productProps) => {
       </Snackbar>
     </Container>
   );
-  
+
 };
