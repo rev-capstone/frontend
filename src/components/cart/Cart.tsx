@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
@@ -11,6 +11,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { TextField } from "@material-ui/core";
 import { Box } from "@mui/material";
 import { mayalsolike } from '../../assets'
+import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
+import { apiGetAllProducts } from "../display-products/ProductCard";
 
 const Container = styled.div``;
 
@@ -192,11 +194,31 @@ justify-content: center;
 font-size: 14px;
 `;
 
+const baseURL = "/api/product"
+
+
 
 export const Cart = () => {
   const { cart, setCart } = useContext(CartContext);
+  const [products, setProducts] = useState<Product[]>([])
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+  const fetchData = async () => {
+    
+    try{
+      const result = await apiGetAllProducts();
+      setProducts(result.payload);
+    }
+    catch(error : any){
+      if(error.response.status === 401) navigate('/')
+    }
+  }
+
+  fetchData();
+
+}, [])
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let product: string = event.target.id;
@@ -240,8 +262,11 @@ export const Cart = () => {
     const index = newCart.findIndex((searchProduct) => {
       return searchProduct.id === product.id
     })
+    const productIndex = products.findIndex((searchProduct) => {
+      return searchProduct.id === product.id
+    })
 
-    newCart[index].quantity > 1 ? newCart[index].quantity++ : newCart.splice(index, 1);
+    if(newCart[index].quantity < products[productIndex].quantity) newCart[index].quantity++;
 
     setCart(newCart)
   }
