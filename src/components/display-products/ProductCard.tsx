@@ -38,8 +38,10 @@ const Container = styled.div`
     &:hover ${Info}{
       opacity: 1;
     }
-    background-color: #dcdcdc;
-    border-radius: 15px;
+    background-color: #ededed;
+    // border-radius: 15px;
+    // border: solid;
+    color: black;
   `;
 
   const ProductName = styled.span`
