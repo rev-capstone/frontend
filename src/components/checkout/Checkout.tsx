@@ -20,6 +20,8 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Narbar';
 import { ModeComment } from '@material-ui/icons';
 import { ThemeConsumer } from 'styled-components';
+import { Button, Box } from '@mui/material';
+import Footer from '../footer/Footer';
 
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
@@ -119,6 +121,10 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
+        <Box>
+                <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
+                </Box>
+                <Footer></Footer>
       </Container></>
   );
 }

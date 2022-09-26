@@ -15,7 +15,6 @@ const FooterBanner = () => {
       </div>
       <div className="right">
         <h4>While Supplies Last!</h4>
-
       </div>
      </div>
      </div>
