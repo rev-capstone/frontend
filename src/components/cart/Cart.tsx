@@ -256,7 +256,7 @@ export const Cart = () => {
           <Info>
             {
               cart.map((product) => (
-                <>
+                <div key={product.id}>
                   <ProductItem>
                     <ProductDetail>
                       <Image src={product.image} />
@@ -285,7 +285,7 @@ export const Cart = () => {
                     </PriceDetail>
                   </ProductItem>
                   <Hr />
-                </>
+                </div>
               ))
             }
           </Info>
