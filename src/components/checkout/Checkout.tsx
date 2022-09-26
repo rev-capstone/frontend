@@ -18,8 +18,26 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../navbar/Narbar';
+import { Box, Button } from '@material-ui/core';
+import styled from "styled-components";
+
+const Footer = styled.h1`
+color: #979797;
+text-align: center;
+margin-top: 185px;
+padding: 30px 10px;
+font-weight: 700;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 10px;
+justify-content: center;
+font-size: 14px;
+`;
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
+
 
 const products: Product[] = [
 ];
@@ -45,7 +63,6 @@ const theme = createTheme();
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const { cart, setCart } = useContext(CartContext);
-  const navigate = useNavigate();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -75,26 +92,17 @@ export default function Checkout() {
         throw new Error('Unknown step');
     }
   }
-
+  const navigate = useNavigate();
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap onClick={() => navigate('/')}>
-            Revature Swag Shop
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <><Navbar /><AppBar
+      position="absolute"
+      color="default"
+      elevation={0}
+      sx={{
+        position: 'relative',
+      }}
+    >
+    </AppBar><Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
@@ -125,7 +133,10 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-      </Container>
-    </ThemeProvider>
+        <Box>
+                <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
+                </Box>
+                <Footer>Kev's Java/React Batch 2022 All rights reserved</Footer>
+      </Container></>
   );
 }
