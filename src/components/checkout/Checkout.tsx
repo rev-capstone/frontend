@@ -8,7 +8,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
@@ -19,25 +18,11 @@ import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Narbar';
-import { Box, Button } from '@material-ui/core';
-import styled from "styled-components";
+import { ModeComment } from '@material-ui/icons';
+import { ThemeConsumer } from 'styled-components';
 
-const Footer = styled.h1`
-color: #979797;
-text-align: center;
-margin-top: 185px;
-padding: 30px 10px;
-font-weight: 700;
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 10px;
-justify-content: center;
-font-size: 14px;
-`;
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
-
 
 const products: Product[] = [
 ];
@@ -58,11 +43,11 @@ let paymentDetail = [
   { name: 'Expiry date', detail: '' },
 ];
 
-const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
   const { cart, setCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -92,7 +77,7 @@ export default function Checkout() {
         throw new Error('Unknown step');
     }
   }
-  const navigate = useNavigate();
+
   return (
       <><Navbar /><AppBar
       position="absolute"
@@ -125,6 +110,7 @@ export default function Checkout() {
                   confirmation, and will send you an update when your order has
                   shipped.
                 </Typography>
+                
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -133,10 +119,6 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-        <Box>
-                <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
-                </Box>
-                <Footer>Kev's Java/React Batch 2022 All rights reserved</Footer>
       </Container></>
   );
 }
