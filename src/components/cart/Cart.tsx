@@ -8,8 +8,8 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 // import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { TextField } from "@material-ui/core";
-import { Box } from "@mui/material";
+import { Snackbar, TextField } from "@material-ui/core";
+import { Alert, Box } from "@mui/material";
 import { mayalsolike } from '../../assets'
 import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
 import { apiGetAllProducts } from "../display-products/ProductCard";
@@ -199,6 +199,7 @@ const baseURL = "/api/product"
 
 
 export const Cart = () => {
+  const [stockOpen, setStockOpen] = useState(false);
   const { cart, setCart } = useContext(CartContext);
   const [products, setProducts] = useState<Product[]>([])
 
@@ -220,16 +221,13 @@ export const Cart = () => {
 
 }, [])
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let product: string = event.target.id;
-    const newCart = [...cart]
-    const index = newCart.findIndex((searchProduct) => {
-      return searchProduct.name === product
-    })
-
-    newCart[index].quantity = parseInt(event.target.value);
-    setCart(newCart)
+const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+  if (reason === 'clickaway') {
+    return;
   }
+  setStockOpen(false);
+
+};
 
   const removeItemFromCart = (product: Product) => {
 
@@ -265,7 +263,7 @@ export const Cart = () => {
       return searchProduct.id === product.id
     })
 
-    if(newCart[index].quantity < products[productIndex].quantity) newCart[index].quantity++;
+    newCart[index].quantity < products[productIndex].quantity ? newCart[index].quantity++ : setStockOpen(true);
 
     setCart(newCart)
   }
@@ -351,6 +349,16 @@ export const Cart = () => {
       </div>
      
       <Footer>Kev's Java/React Batch 2022 All rights reserved</Footer>
+      <Snackbar
+        open={stockOpen}
+        autoHideDuration={2000}
+        onClose={handleClose}
+        anchorOrigin={{vertical:"top",horizontal:"center"}}
+      >
+        <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+          Amount in cart over stock!
+        </Alert>
+      </Snackbar>
     </Container>
     
     
