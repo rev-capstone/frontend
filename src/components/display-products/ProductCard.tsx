@@ -8,7 +8,6 @@ import Product from "../../models/Product";
 import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
 import { useFormControl } from '@mui/material/FormControl';
 
-
 const Info = styled.div`
     opacity: 0;
     width: 98%;
@@ -41,7 +40,6 @@ const Container = styled.div`
     background-color: #ededed;
     // border-radius: 15px;
     // border: solid;
-    color: black;
   `;
 
   const ProductName = styled.span`
@@ -210,9 +208,12 @@ export const ProductCard = (props: productProps) => {
     }
 
     return (
-    <Container data-aos="fade-zoom-in"
+
+    <Container data-aos="fade-zoom-in product-card"
     data-aos-delay="100"
-    data-aos-offset="0" className="product-card">
+    data-aos-offset="0">
+
+      {/* <Container className="product-card"> */}
 
       {/* <Circle /> */}
       <Image src={props.product.image} />
@@ -226,7 +227,7 @@ export const ProductCard = (props: productProps) => {
 
               )}} />
           </Icon>
-          <BoxContainer >
+          <BoxContainer>
               <TextField
                 id="Quantity"
                 style={{backgroundColor:'#989898',paddingLeft:'5px',paddingTop:'3px'}}
@@ -270,6 +271,7 @@ export const ProductCard = (props: productProps) => {
         </Alert>
       </Snackbar>
     </Container>
+ 
   );
   
 };
