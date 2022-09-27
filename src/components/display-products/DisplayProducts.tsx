@@ -27,7 +27,7 @@ const FilterContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  background-color: #f5fbfd;
+  background-color: #dcdcdc;
 `;
 
 const Right = styled.div`
