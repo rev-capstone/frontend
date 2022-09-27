@@ -2,8 +2,9 @@ import * as React from 'react';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Box, Button } from '@mui/material';
+import { Box, Button, createTheme } from '@mui/material';
 import Address from '../../models/Address';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -70,9 +71,8 @@ export default function AddressForm(props: addressFormProps) {
 
     }
 
-    
+  
   }
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -83,98 +83,91 @@ export default function AddressForm(props: addressFormProps) {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               required
               id="firstName"
               name="firstName"
               label="First name"
               fullWidth
               autoComplete="given-name"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               required
               id="lastName"
               name="lastName"
               label="Last name"
               fullWidth
               autoComplete="family-name"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               required
               id="address1"
               name="address1"
               label="Address line 1"
               fullWidth
               autoComplete="shipping address-line1"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               id="address2"
               name="address2"
               label="Address line 2"
               fullWidth
               autoComplete="shipping address-line2"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               required
               id="city"
               name="city"
               label="City"
               fullWidth
               autoComplete="shipping address-level2"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               required
               id="state"
               name="state"
               label="State/Province/Region"
               fullWidth
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               required
               id="zip"
               name="zip"
               label="Zip / Postal code"
               fullWidth
               autoComplete="shipping postal-code"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              inputProps={{maxLength: 255}}
+              inputProps={{ maxLength: 255 }}
               id="country"
               name="country"
               label="Country"
               fullWidth
               autoComplete="shipping country"
-              variant="standard"
-            />
+              variant="standard" />
           </Grid>
         </Grid>
+
         <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <Button
             type="submit"

@@ -4,6 +4,11 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import PaymentDetail from '../../models/PaymentDetail';
 import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { createTheme } from '@material-ui/core/styles';
+
+
+const theme = createTheme();
 
 const nameRegex = new RegExp( /^[a-zA-Z\s]*$/);
 const cardRegex = new RegExp( /(?<=^|[^0-9])[0-9]{16}(?=[^0-9]|$)|[0-9]{4}[-| |_][0-9]{4}[-| |_][0-9]{4}[-| |_][0-9]{4}/);
@@ -76,7 +81,6 @@ export default function PaymentForm(props: paymentFormProps) {
   const formatCardNumber = (cardNumber: string) => {
     return `xxxx-xxxx-xxxx-${cardNumber.slice(-4)}`
   }
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -148,7 +152,6 @@ export default function PaymentForm(props: paymentFormProps) {
           </Button>
         </Box>
       </Box>
-      
     </React.Fragment>
   );
 }
