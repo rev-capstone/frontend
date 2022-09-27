@@ -17,11 +17,11 @@ body, * {
   border-radius: 15px;
   position: relative;
   height: 535px;
-  line-height: 0.9; 
+  line-height: 0.9;
   width: 90%;
   margin:auto;
   margin-top: 20px !important;
-  
+
 
 }
 .hero-banner-container .angularsolo{
@@ -74,7 +74,6 @@ font-size: 18px;
 .products-heading{
   text-align: center;
   margin: 40px 0px;
- color: #000000;
 
 }
 .products-heading h2{
@@ -92,7 +91,7 @@ font-size: 18px;
   border-radius: 15px;
   bottom: 0;
   height: 400px;
-  line-height: 1; 
+  line-height: 1;
   color: white;
   width: 90%;
   margin: auto;
@@ -117,7 +116,7 @@ font-size: 18px;
   left: 8%; */
   top: -55px;
   left: 33%;
- 
+
 }
 
 .may-also-like-image{
@@ -213,8 +212,8 @@ font-size: 18px;
   cursor: pointer;
    transform: scale(1, 1);
    transition: transform 0.5s ease;
- 
- 
+
+
  }
  .product-card:hover{
    transform: scale(1.1,1.1)
@@ -230,14 +229,14 @@ font-size: 18px;
   .hero-banner-container{
     height: 560px;
   }
-  
+
   .hero-banner-image{
     width: 77%;
     height: 62%;
     top: -2%;
     right: -6%;
   }
- 
+
   .footer-banner-image{
     width: 77%;
     left: 30%;
