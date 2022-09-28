@@ -6,13 +6,20 @@ import StepButton from '@mui/material/StepButton';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Product from '../../models/Product';
+import { ProductCard } from './ProductCard';
 
 
 
- let steps = ["ASDFADS", "SADFSAD", "ASDFSAD"];
+export default function HorizontalNonLinearStepper(props: any) {
+  let steps: String[] = [];
 
-export default function HorizontalNonLinearStepper(props : Product[]) {
-  
+  console.log(props.arr);
+  props.arr.forEach((element: { name: String; }) => {
+    steps.push(element.name);
+  });
+
+  //props.arr.map((item: Product)=>(<ProductCard product={item} key={item.id} checkBoxState={false} />));
+
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
@@ -38,8 +45,8 @@ export default function HorizontalNonLinearStepper(props : Product[]) {
     const newActiveStep =
       isLastStep() && !allStepsCompleted()
         ? // It's the last step, but not all steps have been completed,
-          // find the first step that has been completed
-          steps.findIndex((step, i) => !(i in completed))
+        // find the first step that has been completed
+        steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
   };
@@ -67,10 +74,11 @@ export default function HorizontalNonLinearStepper(props : Product[]) {
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper nonLinear activeStep={activeStep}>
-        {steps.map((label, index) => (
-          <Step key={label} completed={completed[index]}>
+        {props.arr.map((item: Product, index: number) => (
+          <Step key={item.name} completed={completed[index]}>
             <StepButton color="inherit" onClick={handleStep(index)}>
-              {label}
+            <ProductCard product={item} key={item.id} checkBoxState={false} />
+              {item.name}
             </StepButton>
           </Step>
         ))}
@@ -123,4 +131,3 @@ export default function HorizontalNonLinearStepper(props : Product[]) {
     </Box>
   );
 }
- 

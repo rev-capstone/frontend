@@ -8,6 +8,7 @@ import { apiGetAllProducts, apiPurchase } from '../../remote/e-commerce-api/prod
 import Navbar from '../navbar/Narbar';
 import { ProductCard } from "./ProductCard";
 import { Footer, FooterBanner, HeroBanner } from '../../components';
+import HorizontalNonLinearStepper from './HorizontalNonLinearStepper';
 
 
 const Container = styled.div`
@@ -111,23 +112,25 @@ export const DisplayProducts = () => {
       catch (error: any) {
         if (error.response.status === 401) navigate('/')
       }
+
     }
-
+    
     fetchData();
-
+    setFeaturedProducts(products.filter((item) => item.featured === true));
+    
   }, [])
-
-
+  
+  
   const handleClick = () => {
     if (checkBoxes) {
       let productos = products.filter(product => { return product.changed === true; });
-
+      
       apiPurchase(productos);
-
+      
       products.forEach(product => { product.changed = false });
-
+      
       setFeaturedProducts(products.filter((item) => item.featured === true));
-
+      console.log(featuredProducts);
     }
     setCheckBoxes(!checkBoxes);
   }
@@ -181,7 +184,7 @@ export const DisplayProducts = () => {
           </Right>
         </FilterContainer>
         <Container id="feature-container">
-         
+          <HorizontalNonLinearStepper arr={featuredProducts}></HorizontalNonLinearStepper>
         </Container>
         <Container id="product-container">
           {products.filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
