@@ -9,12 +9,17 @@ import { ThemeContext } from 'styled-components';
 import { dark, light } from './context/theme.context';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import './styles/master.css';
+import { UserContext } from './context/user.context';
+import User from './models/User';
 
 
 function App() {
   document.title = "Coder's Closet";
   const [cart, setCart] = useState<ProductItem[]>([]);
   const value = { cart, setCart };
+
+  const [user, setUser] = useState<User>(new User("", false));
+  const userValue = { user, setUser};
 
   const [theme, setTheme] = useState<Theme>(light);
   const themeValue = { theme, setTheme };
@@ -24,11 +29,13 @@ function App() {
     <ThemeContext.Provider value={themeValue}>
       <ThemeProvider theme={theme}>
       <CssBaseline />
-        <CartContext.Provider value={value}>
-          <Router>
-            <AppRoutes></AppRoutes>
-          </Router>
-        </CartContext.Provider>
+        <UserContext.Provider value={userValue}>
+          <CartContext.Provider value={value}>
+            <Router>
+              <AppRoutes></AppRoutes>
+            </Router>
+          </CartContext.Provider>
+        </UserContext.Provider>
       </ThemeProvider>
     </ThemeContext.Provider>
   );

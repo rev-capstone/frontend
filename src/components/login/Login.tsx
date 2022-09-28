@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import { Visibility } from '@material-ui/icons';
 import Navbar from '../navbar/Narbar';
 import { cis } from '../../assets';
+import { UserContext } from '../../context/user.context';
+import { useContext } from 'react';
 
 
 const theme = createTheme();
@@ -22,7 +24,7 @@ const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)
 
 
 export default function Login() {
-
+  const { user, setUser } = useContext(UserContext);
   let [visible, setVisible] = React.useState({visibility: false});
   let [errorMessage, setErrormessage] = React.useState({errmessage: ""})
 
@@ -37,7 +39,14 @@ export default function Login() {
       try{
         const response = await apiLogin(`${data.get('email')}`, `${data.get('password')}`);
 
-        if (response.status >= 200 && response.status < 300) navigate('/products')
+        
+        if (response.status >= 200 && response.status < 300) {
+          //TODO: add email and admin value to user context
+          user.admin = response.payload.admin;
+          user.email = response.payload.email;
+          setUser(user);
+          navigate('/products');
+        }
       }
 
       catch(error: any){

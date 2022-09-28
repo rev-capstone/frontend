@@ -1,12 +1,13 @@
-import { FormControl, Snackbar, TextField } from "@material-ui/core";
+import { Checkbox, FormControl, FormControlLabel, Snackbar, TextField } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import { Alert, Box } from "@mui/material";
+import { Alert, Box, Switch } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
 import { useFormControl } from '@mui/material/FormControl';
+import { UserContext } from "../../context/user.context";
 
 const Info = styled.div`
     opacity: 0;
@@ -42,7 +43,7 @@ const Container = styled.div`
     // border: solid;
   `;
 
-  const ProductName = styled.span`
+const ProductName = styled.span`
   `;
 
 // const Circle = styled.div`
@@ -88,7 +89,7 @@ const Stock = styled.div`
     text-align: center;
     font-weight: bold;
   `;
-  const Price = styled.div`
+const Price = styled.div`
     width: 55%;
     height: 40px;
     display: flex;
@@ -101,7 +102,7 @@ const Stock = styled.div`
     text-align: center;
     font-weight: bold;
   `;
-  const BoxContainer = styled.div`
+const BoxContainer = styled.div`
       display: flex;
       width: 80px;
       color: black;
@@ -111,39 +112,46 @@ const Stock = styled.div`
 
 interface productProps {
   product: Product,
-  key: number
+  key: number,
+  checkBoxState: boolean
 }
 const baseURL = "/api/product"
 
 export const apiGetAllProducts = async (): Promise<eCommerceApiResponse> => {
   const response = await eCommerceClient.get<any>(
-      `${baseURL}`
+    `${baseURL}`
   );
   return { status: response.status, payload: response.data };
 }
 export const apiGetProductById = async (id: number): Promise<eCommerceApiResponse> => {
   const response = await eCommerceClient.get<any>(
-      `${baseURL}/${id}`
+    `${baseURL}/${id}`
   );
   return { status: response.status, payload: response.data };
 }
 
 export const apiUpsertProduct = async (product: Product): Promise<eCommerceApiResponse> => {
   const response = await eCommerceClient.put<any>(
-      `${baseURL}`,
-      product
+    `${baseURL}`,
+    product
   );
   return { status: response.status, payload: response.data };
 }
 
+
+
 export const ProductCard = (props: productProps) => {
+
+  const { user, setUser } = useContext(UserContext);
+  
   const el = document.getElementById("price");
-
+  
   const { cart, setCart } = useContext(CartContext);
-
   const [quant, setQuant] = useState('1');
-
   const [inCart, setInCart] = useState(0);
+  const [checked, setChecked]= useState(props.product.featured);
+
+
 
   useEffect(() => {
     const currentCart = [...cart]
@@ -154,14 +162,14 @@ export const ProductCard = (props: productProps) => {
     }
   }, [cart, props.product.id]);
 
-  function price(){
+  function price() {
 
     // console.log(props.product.price);
-    var priceCheck = new String("$"+props.product.price.toFixed(2))
+    var priceCheck = new String("$" + props.product.price.toFixed(2))
     return priceCheck
-/*  }else{
-     el.style.display = "none";
- } */
+    /*  }else{
+         el.style.display = "none";
+     } */
   }
 
   const [open, setOpen] = useState(false);
@@ -202,16 +210,26 @@ export const ProductCard = (props: productProps) => {
 
   }
 
-    function priceDetails(){
-      console.log(props.product.price)
-    }
+  function priceDetails() {
+    console.log(props.product.price)
+  }
 
-    return (
+  const handleCheck = () => {
+    props.product.featured = !props.product.featured;
+    props.product.changed = !props.product.changed;
+    setChecked(props.product.featured);
+  }
+
+  return (
 
     <Container data-aos="fade-zoom-in product-card"
-    data-aos-delay="100"
-    data-aos-offset="0">
+      data-aos-delay="100"
+      data-aos-offset="0">
 
+      {user.admin && props.checkBoxState
+        ? <FormControlLabel control={<Switch checked={checked} onChange={handleCheck}/>} label="Feature!" />
+        : <></>
+      }
       {/* <Container className="product-card"> */}
 
       {/* <Circle /> */}
@@ -222,37 +240,38 @@ export const ProductCard = (props: productProps) => {
         <Icon>
           <ShoppingCartOutlined onClick={() => {
 
-            if (Number(quant) > 0) addItemToCart({ ...props.product, quantity: Number(quant) }
+            if (Number(quant) > 0) addItemToCart({ ...props.product, quantity: Number(quant) } )
 
-              )}} />
-          </Icon>
-          <BoxContainer>
-              <TextField
-                id="Quantity"
-                style={{backgroundColor:'#989898',paddingLeft:'5px',paddingTop:'3px'}}
-                label=""
-                type="number"
-                size="small"
-                inputProps={{
-                  inputMode: 'numeric',
-                  min: '0',
-                }}
+          }} />
+        </Icon>
+        <BoxContainer>
+          <TextField
+            name="quant"
+            id="Quantity"
+            style={{ backgroundColor: '#989898', paddingLeft: '5px', paddingTop: '3px' }}
+            label=""
+            type="number"
+            size="small"
+            inputProps={{
+              inputMode: 'numeric',
+              min: '0',
+            }}
 
-                InputProps={{disableUnderline: true}}
+            InputProps={{ disableUnderline: true }}
 
-                defaultValue="1"
-                variant="standard"
-                onChange={handleChange}
-              />
-          </BoxContainer>
-          <Stock>Stock: {props.product.quantity-inCart}</Stock>
-        </Info>
+            defaultValue="1"
+            variant="standard"
+            onChange={handleChange}
+          />
+        </BoxContainer>
+        <Stock>Stock: {props.product.quantity - inCart}</Stock>
+      </Info>
 
       <Snackbar
         open={open}
         autoHideDuration={2000}
         onClose={handleClose}
-        anchorOrigin={{vertical:"top",horizontal:"center"}}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="success" sx={{ width: '230px' }}>
           Added item to cart!
@@ -263,14 +282,14 @@ export const ProductCard = (props: productProps) => {
         open={stockOpen}
         autoHideDuration={2000}
         onClose={handleClose}
-        anchorOrigin={{vertical:"top",horizontal:"center"}}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           Amount in cart over stock!
         </Alert>
       </Snackbar>
     </Container>
- 
+
   );
 
 };

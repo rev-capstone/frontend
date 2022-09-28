@@ -1,13 +1,14 @@
-import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Pagination, PaginationItem, Select, TextField } from '@mui/material';
 import { AxiosError } from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import Product from '../../models/Product';
-import { apiGetAllProducts } from '../../remote/e-commerce-api/productService';
+import { apiGetAllProducts, apiPurchase } from '../../remote/e-commerce-api/productService';
 import Navbar from '../navbar/Narbar';
 import { ProductCard } from "./ProductCard";
-import {Footer, FooterBanner, HeroBanner } from '../../components';
+import { Footer, FooterBanner, HeroBanner } from '../../components';
+
 
 const Container = styled.div`
   padding-right: 15%;
@@ -57,13 +58,12 @@ const SearchContainer = styled.div`
 `;
 
 export const DisplayProducts = () => {
-
-
-  const [filter, setFilter] = useState("");
-
+  
   const [sort, setSort] = useState("");
-
-  const [products, setProducts] = useState<Product[]>([])
+  const [filter, setFilter] = useState("");
+  const [checkBoxes, setCheckBoxes] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
 
   const navigate = useNavigate();
 
@@ -103,13 +103,13 @@ export const DisplayProducts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      
-      try{
+
+      try {
         const result = await apiGetAllProducts();
         setProducts(result.payload);
       }
-      catch(error : any){
-        if(error.response.status === 401) navigate('/')
+      catch (error: any) {
+        if (error.response.status === 401) navigate('/')
       }
     }
 
@@ -118,114 +118,81 @@ export const DisplayProducts = () => {
   }, [])
 
 
-  // const products: Product[] = [
-  //   {
-  //       id:1,
-  //       image:"https://d3o2e4jr3mxnm3.cloudfront.net/Mens-Jake-Guitar-Vintage-Crusher-Tee_68382_1_lg.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:3,
-  //       image:"https://www.prada.com/content/dam/pradanux_products/U/UCS/UCS319/1YOTF010O/UCS319_1YOT_F010O_S_182_SLF.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:4,
-  //       image:"https://www.burdastyle.com/pub/media/catalog/product/cache/7bd3727382ce0a860b68816435d76e26/107/BUS-PAT-BURTE-1320516/1170x1470_BS_2016_05_132_front.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:5,
-  //       image:"https://images.ctfassets.net/5gvckmvm9289/3BlDoZxSSjqAvv1jBJP7TH/65f9a95484117730ace42abf64e89572/Noissue-x-Creatsy-Tote-Bag-Mockup-Bundle-_4_-2.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:6,
-  //       image:"https://d3o2e4jr3mxnm3.cloudfront.net/Rocket-Vintage-Chill-Cap_66374_1_lg.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  //     {
-  //       id:8,
-  //       image:"https://www.pngarts.com/files/3/Women-Jacket-PNG-High-Quality-Image.png",
-  //       name: '',
-  //       description: '',
-  //       price: 5,
-  //       quantity: 10,
-  //     },
-  // ]
+  const handleClick = () => {
+    if (checkBoxes) {
+      let productos = products.filter(product => { return product.changed === true; });
+
+      apiPurchase(productos);
+
+      products.forEach(product => { product.changed = false });
+
+      setFeaturedProducts(products.filter((item) => item.featured === true));
+
+    }
+    setCheckBoxes(!checkBoxes);
+  }
 
   return (
     <React.Fragment>
       <Navbar />
-      
-      <HeroBanner/>
-  
+
+      <HeroBanner />
+
       <div className="products-heading">
-       
+
         <h2>Luxury Products for Luxurious Coders</h2>
         <p>A Full-Stack Developer's Dream</p>
       </div>
       <div>
-      <FilterContainer>
-        <Left>
-          <DropdownContainer>
-            <FormControl fullWidth>
-              <InputLabel id="dropdown-sort">Sort By:</InputLabel>
-              <Select
+        <FilterContainer>
+          <Left>
+            <DropdownContainer>
+              <FormControl fullWidth>
+                <InputLabel id="dropdown-sort">Sort By:</InputLabel>
+                <Select
+                  autoComplete='off'
+                  variant="standard"
+                  labelId="dropdown-sort"
+                  id="select-sort"
+                  value={sort}
+                  label="Sort"
+                  onChange={sortChange}
+                >
+                  <MenuItem value="None">Default</MenuItem>
+                  <MenuItem value="priceASC">Price: Low</MenuItem>
+                  <MenuItem value="priceDESC">Price: High</MenuItem>
+                  <MenuItem value="quantityASC">Quantity: Low</MenuItem>
+                  <MenuItem value="quantityDESC">Quantity: High</MenuItem>
+                </Select>
+              </FormControl>
+            </DropdownContainer>
+          </Left>
+          <Right>
+            <SearchContainer>
+              <TextField
                 autoComplete='off'
+                id="search"
                 variant="standard"
-                labelId="dropdown-sort"
-                id="select-sort"
-                value={sort}
-                label="Sort"
-                onChange={sortChange}
-              >
-                <MenuItem value="None">Default</MenuItem>
-                <MenuItem value="priceASC">Price: Low</MenuItem>
-                <MenuItem value="priceDESC">Price: High</MenuItem>
-                <MenuItem value="quantityASC">Quantity: Low</MenuItem>
-                <MenuItem value="quantityDESC">Quantity: High</MenuItem>
-              </Select>
-            </FormControl>
-          </DropdownContainer>
-        </Left>
-        <Right>
-          <SearchContainer>
-            <TextField
-              autoComplete='off'
-              id="search"
-              variant="standard"
-              label="Search"
-              onChange={filterChange}
-            />
-          </SearchContainer>
-        </Right>
-      </FilterContainer>
-      <Container id="product-container">
-        {products.filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
-          <ProductCard product={item} key={item.id} />
-        ))}
-      </Container>
+                label="Search"
+                onChange={filterChange}
+              />
+            </SearchContainer>
+            <Button variant="outlined" onClick={handleClick}>{checkBoxes ? "submit" : "set featured products"}</Button>
+          </Right>
+        </FilterContainer>
+        <Container id="feature-container">
+         
+        </Container>
+        <Container id="product-container">
+          {products.filter((item) => item.name.toLocaleLowerCase().includes(filter) || item.description.toLocaleLowerCase().includes(filter)).map((item) => (
+            <ProductCard product={item} key={item.id} checkBoxState={checkBoxes} />
+          ))}
+        </Container>
       </div>
       <FooterBanner />
       <Footer />
     </React.Fragment>
-    
+
 
   );
 };
