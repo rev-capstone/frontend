@@ -8,7 +8,6 @@ import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
@@ -18,6 +17,12 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../navbar/Narbar';
+import { ModeComment } from '@material-ui/icons';
+import { ThemeConsumer } from 'styled-components';
+import { Button, Box } from '@mui/material';
+import Footer from '../footer/Footer';
+
 
 const steps = ['Shipping address', 'Payment details', 'Review your order'];
 
@@ -40,7 +45,6 @@ let paymentDetail = [
   { name: 'Expiry date', detail: '' },
 ];
 
-const theme = createTheme();
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -77,24 +81,15 @@ export default function Checkout() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <AppBar
-        position="absolute"
-        color="default"
-        elevation={0}
-        sx={{
-          position: 'relative',
-          borderBottom: (t) => `1px solid ${t.palette.divider}`,
-        }}
-      >
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap onClick={() => navigate('/')}>
-            Revature Swag Shop
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+      <><Navbar /><AppBar
+      position="absolute"
+      color="default"
+      elevation={0}
+      sx={{
+        position: 'relative',
+      }}
+    >
+    </AppBar><Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
         <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
           <Typography component="h1" variant="h4" align="center">
             Checkout
@@ -117,6 +112,7 @@ export default function Checkout() {
                   confirmation, and will send you an update when your order has
                   shipped.
                 </Typography>
+                
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -125,7 +121,10 @@ export default function Checkout() {
             )}
           </React.Fragment>
         </Paper>
-      </Container>
-    </ThemeProvider>
+        <Box>
+                <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
+                </Box>
+                <Footer></Footer>
+      </Container></>
   );
 }
