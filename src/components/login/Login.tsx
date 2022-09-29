@@ -15,8 +15,18 @@ import { useNavigate } from 'react-router-dom';
 import { Visibility } from '@material-ui/icons';
 import Navbar from '../navbar/Narbar';
 import { cis } from '../../assets';
+import styled from "styled-components"
 
+const LoginText = styled.div`
+  color: white;
+  padding-top: 100px;
+  margin-left: 100px;
+`;
 
+const LoginTextContainer = styled.div`
+  width: 50vw;
+  height: 80vh;
+`;
 const theme = createTheme();
 const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
@@ -57,8 +67,26 @@ export default function Login() {
   };
   return (
 
-      <>
-        <Navbar /><Container style={{border: 'solid', marginTop: '130px', background: "rgba(225, 225, 225, 0.15)", borderRadius: 10,}} component="main" maxWidth="xs">
+      <div style={{backgroundColor: "black", height: "100vh"}}>
+      
+        <Navbar />
+        <LoginTextContainer>
+          <LoginText>
+           <h1 className="text-gradient" style={{ marginLeft: "80px", fontSize: "80px"}}>Coder's Closet</h1>
+           <h1 style={{ marginLeft: "80px", fontSize: "70px"}}>For Coders</h1>
+           <h1 style={{ marginLeft: "80px", fontSize: "70px"}}>By Coders</h1>
+           <p style= {{ paddingTop: "10px", marginLeft: "80px",fontSize: "20px"}}>
+            We are fueling the future of Full-Stack Developers
+           </p>
+           <p style= {{ marginLeft: "80px", fontSize: "20px"}}>
+           by providing the best in performance gear in the game
+           </p>
+
+          </LoginText>
+          
+        
+    
+        <Container style={{border: 'solid', marginLeft: "900px", marginTop: "-400px", background: "white", paddingBottom: "100px",/*background: "rgba(225, 225, 225, 0.15)"*/ borderRadius: "5px" }} component="main" maxWidth="xs">
       <Box
         sx={{
           marginTop: 8,
@@ -68,7 +96,7 @@ export default function Login() {
         }}
       >
 
-        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+        <Avatar sx={{ m: 1, bgcolor: 'black' }}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
@@ -105,6 +133,7 @@ export default function Login() {
           {visible.visibility ? <div style={{ color: 'red', display: 'block' }}> Email/password is incorrect</div> : <></>}
 
           <Button
+            style={{  background: "radial-gradient(60.18% 64.18% at 61.16% 15.69%,#FD9346 55.12%, #FD7F2C 71.54%, #FF6200 100%)"}}
             type="submit"
             fullWidth
             variant="contained"
@@ -122,6 +151,7 @@ export default function Login() {
         </Box>
       </Box>
     </Container>
-    </>
+    </LoginTextContainer>
+    </div>
   );
 }
