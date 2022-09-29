@@ -79,7 +79,7 @@ export default function Login() {
             We are fueling the future of Full-Stack Developers
            </p>
            <p style= {{ marginLeft: "80px", fontSize: "20px"}}>
-           by providing the best in performance gear in the game
+           by providing the best performance gear in the game
            </p>
 
           </LoginText>
@@ -133,7 +133,7 @@ export default function Login() {
           {visible.visibility ? <div style={{ color: 'red', display: 'block' }}> Email/password is incorrect</div> : <></>}
 
           <Button
-            style={{  background: "radial-gradient(60.18% 64.18% at 61.16% 15.69%,#FD9346 55.12%, #FD7F2C 71.54%, #FF6200 100%)"}}
+            style={{ background: "radial-gradient(60.18% 64.18% at 61.16% 15.69%,#FD9346 55.12%, #FD7F2C 71.54%, #FF6200 100%)"}}
             type="submit"
             fullWidth
             variant="contained"

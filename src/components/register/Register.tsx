@@ -13,10 +13,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiRegister } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 import {Tooltip} from '@material-ui/core';
-
-
-
 import Navbar from '../navbar/Narbar';
+import styled from 'styled-components';
+
+const RegisterContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
 
 const theme = createTheme();
 const emailRegex = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
@@ -73,7 +76,10 @@ export default function Register() {
   };
 
   return (
-      <><Navbar /><Container component="main" maxWidth="xs">
+      <div style={{backgroundColor: "black"}}>
+        <RegisterContainer>
+      <Navbar />
+      <Container style={{background: "white", paddingBottom: "15px"}} component="main" maxWidth="xs">
         <Box
           sx={{
             marginTop: 8,
@@ -82,7 +88,7 @@ export default function Register() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: 'black', marginTop: "20px" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -138,12 +144,10 @@ export default function Register() {
                 />
                 </Tooltip>
               </Grid>
-              
-
-                
             </Grid>
             {visible.visibility ? <div style={{ color: 'red', display: 'block' }}> {errorMessage.errmessage}</div> : <></>}
             <Button
+            style={{ background: "radial-gradient(60.18% 64.18% at 61.16% 15.69%,#FD9346 55.12%, #FD7F2C 71.54%, #FF6200 100%)"}}
               type="submit"
               fullWidth
               variant="contained"
@@ -152,14 +156,16 @@ export default function Register() {
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
+              <Grid item><br></br>
                 <Link href="/" variant="body2">
-                  Already have an account? Sign in
+                  Already have an account? Sign in <br></br>
                 </Link>
               </Grid>
             </Grid>
         </Box>
       </Box>
-    </Container></>
+    </Container>
+    </RegisterContainer>
+    </div>
   );
 }
