@@ -31,7 +31,7 @@ const Arrow = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
-    margin: auto;
+    margin-top: 250px;
     left: ${props=> props.direction === "left" && "30px"};
     right: ${props=> props.direction === "right" && "40px"};
     cursor: pointer;
