@@ -34,7 +34,7 @@ body, * {
 }
 .hero-banner-container h1{
   color: white;
-  font-size: 115px;
+  font-size: 90px;
   margin-left: -20px;
   text-transform: uppercase;
 }
@@ -73,7 +73,8 @@ font-size: 18px;
 }
 .products-heading{
   text-align: center;
-  margin: 40px 0px;
+  margin-bottom: 100px;
+
 
 }
 .products-heading h2{
@@ -81,8 +82,9 @@ font-size: 18px;
   font-weight: 800;
 }
 .products-heading p{
-  font-size: 16px;
+  font-size: 26px;
   font-weight: 200;
+  margin-top: 20px;
 }
 
 .footer-banner-container{

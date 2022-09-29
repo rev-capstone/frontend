@@ -90,7 +90,7 @@ const Navbar = () => {
           {window.location.pathname != '/' && window.location.pathname != '/register' ?
             <><MenuItem onClick={ logout }>LOGOUT</MenuItem>
               <MenuItem onClick={() => { navigate('/cart'); }}>
-                <Badge color="primary" overlap="rectangular">
+                <Badge badgeContent={4} color="secondary" overlap="rectangular">
                   <ShoppingCartOutlined style={{fill: "#EC5800"}} />
                 </Badge>
               </MenuItem><Button onClick={lightDark}>{x ? sun : moon}</Button></> :
