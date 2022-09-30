@@ -10,6 +10,9 @@ import { light, dark } from "../../context/theme.context";
 import { apiLogout } from "../../remote/e-commerce-api/authService";
 import { cclogo } from "../../assets";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import { useSelector } from "react-redux";
+
+
 
 const Container = styled.div`
   height: 60px;
@@ -57,6 +60,7 @@ let sun = <Brightness4Icon />;
 let x = true;
 
 const Navbar = () => {
+  const quantity = useSelector((state: any ) => state.cart.quantity)
   const navigate = useNavigate();
   const { theme, setTheme } = useContext(ThemeContext);
 
@@ -90,7 +94,7 @@ const Navbar = () => {
           {window.location.pathname != '/' && window.location.pathname != '/register' ?
             <><MenuItem onClick={ logout }>LOGOUT</MenuItem>
               <MenuItem onClick={() => { navigate('/cart'); }}>
-                <Badge badgeContent={20} color="secondary" overlap="rectangular">
+                <Badge badgeContent={quantity} color="secondary" overlap="rectangular">
                   <ShoppingCartOutlined style={{fill: "#EC5800"}} />
                 </Badge>
               </MenuItem><Button onClick={lightDark}>{x ? sun : moon}</Button></> :

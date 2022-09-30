@@ -79,7 +79,7 @@ export default function Register() {
       <div style={{backgroundColor: "black"}}>
         <RegisterContainer>
       <Navbar />
-      <Container style={{background: "white", paddingBottom: "15px"}} component="main" maxWidth="xs">
+      <Container style={{background: "white", paddingBottom: "15px", borderRadius: "5px"}} component="main" maxWidth="xs">
         <Box
           sx={{
             marginTop: 8,

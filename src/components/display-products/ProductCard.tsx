@@ -7,6 +7,8 @@ import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
 import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
 import { useFormControl } from '@mui/material/FormControl';
+import { addProduct } from "../../redux/CartRedux";
+import { useDispatch } from "react-redux";
 
 const Info = styled.div`
     opacity: 0;
@@ -141,9 +143,13 @@ export const ProductCard = (props: productProps) => {
 
   const { cart, setCart } = useContext(CartContext);
 
-  const [quant, setQuant] = useState('1');
+  const [product, setProduct] = useState({});
+
+  const [quant, setQuant] = useState('0');
 
   const [inCart, setInCart] = useState(0);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const currentCart = [...cart]
@@ -170,6 +176,7 @@ export const ProductCard = (props: productProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuant(event.target.value);
+   handleClick();
 
   }
 
@@ -206,6 +213,10 @@ export const ProductCard = (props: productProps) => {
       console.log(props.product.price)
     }
 
+    const handleClick = () => {
+      dispatch(addProduct({ product, quant }))
+    };
+
     return (
 
     <Container data-aos="fade-zoom-in product-card"
@@ -224,10 +235,12 @@ export const ProductCard = (props: productProps) => {
 
             if (Number(quant) > 0) addItemToCart({ ...props.product, quantity: Number(quant) }
 
-              )}} />
+              );
+              // handleClick();
+              }} />
           </Icon>
           <BoxContainer>
-              <TextField
+              <TextField 
                 id="Quantity"
                 style={{backgroundColor:'#989898',paddingLeft:'5px',paddingTop:'3px'}}
                 label=""
@@ -240,7 +253,7 @@ export const ProductCard = (props: productProps) => {
 
                 InputProps={{disableUnderline: true}}
 
-                defaultValue="1"
+                defaultValue="0"
                 variant="standard"
                 onChange={handleChange}
               />

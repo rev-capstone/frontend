@@ -15,6 +15,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { ModeComment } from '@material-ui/icons';
 import Narbar from './components/navbar/Narbar';
 import { dark } from './context/theme.context';
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -22,10 +24,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <ThemeProvider theme={dark}>
   <CssBaseline />
-  <React.StrictMode>
- 
-    <App/>
-  </React.StrictMode>
+  {/* <React.StrictMode> */}
+  <Provider store={ store }>
+  <App/>
+  </Provider>
+  {/* </React.StrictMode> */}
 </ThemeProvider>
 
 
