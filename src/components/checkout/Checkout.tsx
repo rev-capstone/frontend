@@ -119,11 +119,12 @@ export default function Checkout() {
                 {getStepContent(activeStep)}
               </React.Fragment>
             )}
+             <Box>
+                <Button style = {{marginTop: "-33px", backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
+                </Box>
           </React.Fragment>
         </Paper>
-        <Box>
-                <Button style = {{backgroundColor : "#1976d2" ,color : "white",float : "left"}} variant = "contained" onClick={() => {navigate('/products')}}>Back to Products</Button>
-                </Box>
+       
                 <Footer></Footer>
       </Container></>
   );
