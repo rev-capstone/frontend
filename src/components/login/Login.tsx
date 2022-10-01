@@ -19,7 +19,7 @@ import styled from "styled-components"
 
 const LoginText = styled.div`
   color: white;
-  padding-top: 100px;
+  padding-top: 165px;
   margin-left: 100px;
 `;
 
@@ -66,10 +66,10 @@ export default function Login() {
     }
   };
   return (
-
-      <div style={{backgroundColor: "black", height: "100vh"}}>
+    // style={{backgroundColor: "black", height: "100vh"}}
+      <div style={{backgroundImage: "url(" + "https://i.ibb.co/j316hw0/bg3.jpg" + ")", height: "100vh", width: "100vw", backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover"}}>
       
-        <Navbar />
+       
         <LoginTextContainer>
           <LoginText>
            <h1 className="text-gradient" style={{ marginLeft: "80px", fontSize: "80px"}}>Coder's Closet</h1>
@@ -86,8 +86,8 @@ export default function Login() {
           
         
     
-        <Container style={{border: 'solid', marginLeft: "900px", marginTop: "-400px", background: "white", paddingBottom: "100px",/*background: "rgba(225, 225, 225, 0.15)"*/ borderRadius: "5px" }} component="main" maxWidth="xs">
-      <Box
+        <Container style={{marginLeft: "900px", marginTop: "-400px", background: "white", paddingBottom: "50px", borderRadius: "5px", paddingTop: "5px", height: "425px" }} component="main" maxWidth="xs">
+      <Box style={{marginTop: "20px"}}
         sx={{
           marginTop: 8,
           display: 'flex',
@@ -96,7 +96,7 @@ export default function Login() {
         }}
       >
 
-        <Avatar sx={{ m: 1, bgcolor: 'black' }}>
+        <Avatar sx={{ m: 1, bgcolor: 'black'}}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">

@@ -181,7 +181,5 @@ export const DisplayProducts = () => {
       <FooterBanner />
       <Footer />
     </React.Fragment>
-    
-
   );
 };

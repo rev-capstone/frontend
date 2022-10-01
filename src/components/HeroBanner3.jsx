@@ -12,7 +12,6 @@ const HeroBanner3 = () => {
         <h1>WIRELESS</h1>
         <h1>ERGONOMIC</h1>
         <h1>MOUSE</h1>
-        <img src={revaturemouse} alt="headphones" className="hero-banner-image"/>
         <div className="desc">
           <h5>Description</h5>
           <p>The 1000 mAh lithium battery can run up to 360 days and can last about 12 months on standby mode. It only takes 10 seconds to fully charge. The structure of left/right buttons are separated from the upper cover, which makes each click easier and more durable. The thumb concave improve the comfortability of fingers and improves click efficiency</p>

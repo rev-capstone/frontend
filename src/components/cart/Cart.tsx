@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { CartContext } from "../../context/cart.context";
 import Product from "../../models/Product";
-import Navbar from "../navbar/Narbar";
+import Navbar2 from "../navbar/Navbar2";
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
 // import DeleteIcon from '@mui/icons-material/Delete';
@@ -144,7 +144,7 @@ const Summary = styled.div`
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
-  height: 50vh;
+  height: 58vh;
 `;
 
 const SummaryTitle = styled.h1`
@@ -271,7 +271,7 @@ const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
 
   return (
     <Container>
-      <Navbar />
+      <Navbar2 />
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Bottom>

@@ -17,7 +17,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/cart.context';
 import Product from '../../models/Product';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../navbar/Narbar';
+import Navbar2 from '../navbar/Navbar2';
 import { ModeComment } from '@material-ui/icons';
 import { ThemeConsumer } from 'styled-components';
 import { Button, Box } from '@mui/material';
@@ -81,7 +81,7 @@ export default function Checkout() {
   }
 
   return (
-      <><Navbar /><AppBar
+      <><Navbar2 /><AppBar
       position="absolute"
       color="default"
       elevation={0}

@@ -5,6 +5,8 @@ import cclogo from "./cclogo.png";
 import cis from "./cis.png";
 import handwarmer from "./handwarmer.png";
 import revaturemouse from "./revaturemouse.png"
+import bg1 from "./bg1.jpg";
+import bg2 from "./bg2.jpg";
 
 export { angularsolo };
 export { ram };
@@ -13,3 +15,5 @@ export { cclogo };
 export { cis };
 export { handwarmer };
 export { revaturemouse };
+export { bg1 };
+export  { bg2 };

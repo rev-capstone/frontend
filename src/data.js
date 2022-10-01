@@ -1,7 +1,7 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://i.ibb.co/bbg1QSR/angularhp.png",
+      img: "https://i.ibb.co/68xMcMB/angularhp.png",
     },
     {
       id: 2,
