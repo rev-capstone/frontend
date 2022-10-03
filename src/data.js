@@ -9,6 +9,6 @@ export const sliderItems = [
     },
     {
       id: 3,
-      img: "https://s3bucketrt34.s3.amazonaws.com/handwarmer.png",
+      img: "https://s3bucketrt34.s3.amazonaws.com/handwarmer_banner.png",
     },
   ];
