@@ -1,14 +1,14 @@
 export const sliderItems = [
     {
       id: 1,
-      img: "https://i.ibb.co/68xMcMB/angularhp.png",
+      img: "https://s3bucketrt34.s3.amazonaws.com/angularhp.png",
     },
     {
       id: 2,
-      img: "https://i.ibb.co/56XymBr/handwarmer.png",
+      img: "https://s3bucketrt34.s3.amazonaws.com/revaturemouse.png",
     },
     {
       id: 3,
-      img: "https://i.ibb.co/2vc9pDc/revaturemouse.png",
+      img: "https://s3bucketrt34.s3.amazonaws.com/handwarmer.png",
     },
   ];
