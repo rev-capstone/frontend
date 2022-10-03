@@ -59,7 +59,7 @@ const Image = styled.img `
     width: 90vw;
     display: flex;
     margin: auto;
-    margin-left: 75px;
+    margin-left: 65px;
     margin-right: 83px;
     border-radius: 25px;
 `;
