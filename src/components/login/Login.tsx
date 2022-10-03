@@ -13,8 +13,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { apiLogin } from '../../remote/e-commerce-api/authService';
 import { useNavigate } from 'react-router-dom';
 import { Visibility } from '@material-ui/icons';
-import Navbar from '../navbar/Narbar';
-import { cis } from '../../assets';
 import styled from "styled-components"
 
 const LoginText = styled.div`

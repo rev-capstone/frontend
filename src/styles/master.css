@@ -210,14 +210,15 @@ font-size: 18px;
 
 .maylike-products-wrapper{
   margin-top: 50px;
-}
+ }
+
 .maylike-products-wrapper h2{
   text-align: center;
   margin: 50px;
   color: #000000;
-
-  font-size: 28px;
+  font-size: 40px;
 }
+
 .maylike-products-container{
   display: flex;
   justify-content: center;
@@ -304,15 +305,12 @@ font-size: 18px;
   height: 10%;
 }
 
-.login-bg {
-  background-image: url('../assets/cis.png');
-  margin-top: 500px;
-}
-
 .particlesheader {
   font-size: 24px;
   margin-top: 350px;
   text-align: center;
   color: white;
 }
+
+
 }

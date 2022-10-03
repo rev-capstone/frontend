@@ -2,18 +2,30 @@ import angularsolo from "./angularsolo.png";
 import ram from "./ram.png";
 import mayalsolike from "./mayalsolike.png";
 import cclogo from "./cclogo.png";
-import cis from "./cis.png";
 import handwarmer from "./handwarmer.png";
 import revaturemouse from "./revaturemouse.png"
-import bg1 from "./bg1.jpg";
-import bg2 from "./bg2.jpg";
+import angularhp from "./angularhp.png";
+import angularhpsmall from "./angularhpsmall.png";
+import cplushp  from "./cplushp.png";
+import coffeemug from "./coffeemug.png";
+import doomhp from "./doomhp.png";
+import kevin2 from "./kevin2.png";
+import rgbkb from "./rgbkb.png";
+import victsingmouse from "./victsingmouse.png"
 
 export { angularsolo };
 export { ram };
 export { mayalsolike };
 export { cclogo };
-export { cis };
 export { handwarmer };
 export { revaturemouse };
-export { bg1 };
-export  { bg2 };
+
+//You may also loke
+export { angularhp };
+export { angularhpsmall };
+export { cplushp };
+export { coffeemug };
+export { doomhp };
+export { kevin2 };
+export { rgbkb };
+export { victsingmouse };

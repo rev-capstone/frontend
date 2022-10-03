@@ -10,9 +10,11 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Snackbar, TextField } from "@material-ui/core";
 import { Alert, Box } from "@mui/material";
-import { mayalsolike } from '../../assets'
+// import { mayalsolike } from '../../assets'
+import YouMayAlsoLike from "../YouMayAlsoLike";
 import eCommerceClient, { eCommerceApiResponse } from "../../remote/e-commerce-api/eCommerceClient";
 import { apiGetAllProducts } from "../display-products/ProductCard";
+
 
 const Container = styled.div``;
 
@@ -343,10 +345,8 @@ const handleClose = (event: React.SyntheticEvent | Event, reason?: string) => {
       </Wrapper>
       <div className="maylike-products-wrapper">
         <h2>You may also like</h2>
-          <div className="maylike-product-container">
-          <img src={mayalsolike} alt="headphones" className="may-also-like-image"/>
-          </div>
       </div>
+      <YouMayAlsoLike />
      
       <Footer>Kev's Java/React Batch 2022 All rights reserved</Footer>
       <Snackbar
