@@ -1,6 +1,6 @@
 import { Badge } from "@material-ui/core";
 import { ShoppingCartOutlined } from "@material-ui/icons";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styled, { ThemeContext } from "styled-components";
@@ -11,6 +11,7 @@ import { apiLogout } from "../../remote/e-commerce-api/authService";
 import { cclogo } from "../../assets";
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import { useSelector } from "react-redux";
+import { CartContext } from "../../context/cart.context";
 
 
 
@@ -60,7 +61,8 @@ let sun = <Brightness4Icon />;
 let x = true;
 
 const Navbar = () => {
-  const quantity = useSelector((state: any ) => state.cart.quantity)
+  const {cart, setCart} = useContext(CartContext);
+  
   const navigate = useNavigate();
   const { theme, setTheme } = useContext(ThemeContext);
 
@@ -94,7 +96,7 @@ const Navbar = () => {
           {window.location.pathname != '/' && window.location.pathname != '/register' ?
             <><MenuItem onClick={ logout }>LOGOUT</MenuItem>
               <MenuItem onClick={() => { navigate('/cart'); }}>
-                <Badge badgeContent={quantity} color="secondary" overlap="rectangular">
+                <Badge badgeContent={cart.length} color="secondary" overlap="rectangular">
                   <ShoppingCartOutlined style={{fill: "#EC5800"}} />
                 </Badge>
               </MenuItem><Button onClick={lightDark}>{x ? sun : moon}</Button></> :

@@ -13,7 +13,8 @@ const theme = createTheme();
 const nameRegex = new RegExp( /^[a-zA-Z\s]*$/);
 const cardRegex = new RegExp( /(?<=^|[^0-9])[0-9]{16}(?=[^0-9]|$)|[0-9]{4}[-| |_][0-9]{4}[-| |_][0-9]{4}[-| |_][0-9]{4}/);
 const cvvRegex = new RegExp(/^[0-9]{3}$/);
-const expRegex = new RegExp(/(\d){2}\/(\d){2}/);
+const expRegex = new RegExp(/((0[1-9])|(1[0-2]))[\/]*(2[2-9])/);
+
 
 
 
@@ -31,6 +32,9 @@ export default function PaymentForm(props: paymentFormProps) {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    const date = new Date();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear()%100;
 
     if(!nameRegex.test(`${data.get('cardName')}`)){
 
@@ -55,8 +59,7 @@ export default function PaymentForm(props: paymentFormProps) {
 
     }
 
-    else if(!expRegex.test(`${data.get('expDate')}`)){
-
+    else if(!expRegex.test(`${data.get('expDate')}`) || (year === parseInt(`${data.get('expDate')}`.substring(3,5)) && month > parseInt(`${data.get('expDate')}`.substring(0,2)))){
 
       setErrormessage({...errorMessage, errmessage: "\nInvalid Exp date!"});
       setVisible({...visible, visibility: true});

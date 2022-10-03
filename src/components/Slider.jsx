@@ -81,10 +81,8 @@ const Slider = () => {
             <ArrowBackIosIcon />
         </Arrow>
         <Wrapper slideIndex={slideIndex}>
-            {sliderItems.map((item) => (
-
-            
-            <Slide>
+            {sliderItems.map((item) => (            
+            <Slide key={item.id}>
             <ImgContainer>
                 <Image  data-aos="fade-zoom-in"
                     data-aos-delay="300"
