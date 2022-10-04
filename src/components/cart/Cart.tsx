@@ -6,7 +6,6 @@ import Product from "../../models/Product";
 import Navbar2 from "../navbar/Navbar2";
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-// import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Snackbar, TextField } from "@material-ui/core";
 import { Alert, Box } from "@mui/material";
